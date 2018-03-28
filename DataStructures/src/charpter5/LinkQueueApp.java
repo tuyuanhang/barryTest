@@ -1,6 +1,5 @@
 package charpter5;
 
-import javax.swing.border.EmptyBorder;
 
 class LinkQ {
 	public long dData;
