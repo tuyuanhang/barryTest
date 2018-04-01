@@ -1,7 +1,5 @@
 package charpter5;
 
-import javax.lang.model.type.NullType;
-
 class LinkS {
 	public long dData;
 	public LinkS next;

@@ -1,8 +1,5 @@
 package charpter5;
 
-import javax.crypto.NullCipher;
-import javax.lang.model.type.NullType;
-
 class SortedList {
 	private LinkS first;
 	
