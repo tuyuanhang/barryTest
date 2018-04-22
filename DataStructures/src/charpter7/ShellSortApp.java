@@ -1,5 +1,7 @@
 package charpter7;
 
+
+
 class ArraySh {
 	private long[] theArray;
 	private int nElems;
@@ -30,9 +32,36 @@ class ArraySh {
 		while( h <= nElems/3) {
 			h = 3 * h + 1;
 		}
+		
+		while(h>0) {
+			for (outer=h; outer<nElems; outer++) {
+				temp = theArray[outer];
+				inner = outer;
+				
+				while(inner>h-1 && theArray[inner-h] > temp) {
+					theArray[inner] = theArray[inner-h];
+					inner -= h;
+				}
+				theArray[inner] = temp;
+			}
+			h=(h-1)/3;
+		}
 	}
 }
 
 public class ShellSortApp {
-
+	public static void main(String[] args) {
+		int maxSize = 100;
+		ArraySh arr;
+		arr = new ArraySh(maxSize);
+		
+		for (int j=0; j<maxSize; j++) {
+			long n = (int)(java.lang.Math.random()*99);
+			arr.insert(n);
+		}
+		
+		arr.display();
+		arr.shellSort();
+		arr.display();
+	}
 }
