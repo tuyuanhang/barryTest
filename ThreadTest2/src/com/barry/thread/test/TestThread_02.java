@@ -22,7 +22,7 @@ public class TestThread_02 {
 		PrintWriter pw = null;
 		try {
 			FileWriter file = new FileWriter(".\\data\\log.txt");
-		
+			pw  = new PrintWriter(file);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
