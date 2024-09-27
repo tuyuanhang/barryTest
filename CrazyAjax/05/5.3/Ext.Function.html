@@ -1,0 +1,32 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	// 创建一个延迟函数
+	var fn = Ext.Function.createDelayed(function()
+	{
+		alert("函数被调用！");
+	} , 2000);
+	// 调用该函数，但函数会延迟2000ms之后才执行。
+	fn();      //①
+	var user = {
+		name : "孙悟空",
+		sayHi: function()
+		{
+			document.writeln(this.name + "向别人打招呼<br/>");
+		}
+	}
+	// 在user的sayHi()方法执行之后插入行为
+	Ext.Function.interceptAfter(user , "sayHi" ,
+		function()
+		{
+			document.writeln("打招呼之后的行为！<br/>");
+		});
+	// 在user的sayHi()方法执行之前插入行为
+	Ext.Function.interceptBefore(user , "sayHi" ,
+		function()
+		{
+			document.writeln("打招呼之前的行为！<br/>");
+		});
+	user.sayHi();      //②
+</script>

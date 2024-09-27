@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 插入元素 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		var div1 = document.createElement("div");
+		div1.innerHTML = "前面的内容";
+		Ext.fly(div1)
+			.setStyle("background-color" , "#afa")
+			.insertBefore(a);
+		var div2 = document.createElement("div");
+		div2.innerHTML = "后面的内容";
+		Ext.fly(div2)
+			.setStyle("background-color" , "#afa")
+			.insertAfter(a);
+	});
+</script>
+<div id="a" style="border:1px solid black;height:60px">fkjava</div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.action.Submit提交表单 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	var failureHandler = function(form, action)
+	{
+		switch (action.failureType) 
+		{
+			// 客户端校验失败的错误类型
+			case Ext.form.action.Action.CLIENT_INVALID:
+				Ext.Msg.alert('失败', '表单域可能包含了无效的值!');
+				break;
+			// 服务器资源出现错误的错误类型。
+			case Ext.form.action.Action.CONNECT_FAILURE:
+				Ext.Msg.alert('失败', '无法访问服务器资源！');
+				break;
+			// 服务器响应失败的错误类型（即服务器响应的success为false）
+			case Ext.form.action.Action.SERVER_INVALID:
+				Ext.Msg.alert('失败', '服务器响应出错！');
+		}
+	};	
+	// 创建表单容器
+	Ext.create('Ext.form.Panel', {
+		title: '使用Ext.form.action.Submit提交表单',
+		bodyPadding: 5,
+		width: 350, // 指定表单宽度
+		method: 'POST', // 指定以POST方式提交请求
+		// 默认使用anchor布局方式
+		layout: 'anchor',
+		// 设置表单控件默认占满整个容器
+		defaults: {
+			anchor: '100%'
+		},
+		// 设置表单组件的默认类型
+		defaultType: 'textfield',
+		// 为所有表单控件设置默认属性
+		fieldDefaults: {
+			labelAlign: 'left',
+			labelWidth: 100
+		},
+		items: [
+			{
+				fieldLabel: '用户名', // 表单控件的Label
+				name: 'name', // 表单控件的名称
+				allowBlank: false // 输入校验：不允许为空
+			}
+		],
+		// 为表单设置按钮
+		buttons: [
+			{
+				// 提交按钮
+				text: '提交地址不存在',
+				formBind: true, // 只有当整个表单输入校验通过时，该按钮才可用
+				disabled: true, // 设置该按钮默认不可用
+				// 单击该按钮的事件处理函数
+				handler: function()
+				{
+					// 获取表单，实际返回的是Ext.form.Basic对象
+					var form = this.up('form').getForm();
+					// 如果表单输入校验通过
+					if (form.isValid()) 
+					{
+						// 以Ajax方式提交表单
+						form.submit(
+						{
+							url: 'a.jsp', // 该页面不存在
+							// 提交失败的处理函数
+							failure: failureHandler
+						});
+					}
+				}
+			},
+			{
+				// 提交按钮
+				text: '输入fkjava才有效',
+				formBind: true, // 只有当整个表单输入校验通过时，该按钮才可用
+				disabled: true, // 设置该按钮默认不可用
+				// 单击该按钮的事件处理函数
+				handler: function()
+				{
+					// 获取表单，实际返回的是Ext.form.Basic对象
+					var form = this.up('form').getForm();
+					// 如果表单输入校验通过
+					if (form.isValid()) 
+					{
+						// 以Ajax方式提交表单
+						form.submit(
+						{
+							url: 'simplePro', // 该页面不存在
+							// 提交成功，第一个参数是Ext.form.Basic对象
+							// 第二个参数是Ext.action.Action对象
+							success: function(form, action) 
+							{
+								Ext.Msg.alert('处理成功！', action.result.msg);
+							},
+							// 提交失败的处理函数
+							failure: failureHandler
+						});
+					}
+				}
+			}
+		],
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

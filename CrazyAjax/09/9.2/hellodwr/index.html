@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> DWR入门 </title>
+	<!-- 导入DWR引擎的核心JavaScript代码库 -->
+	<script type='text/javascript' src='leedwr/engine.js'></script>
+	<!-- 导入开发者为本应用编写的JavaScript代码库 -->
+	<script type='text/javascript' src='hellodwr.js'></script>
+	<!-- 导入DWR为hello对象动态生成的JavaScript代码库 -->
+	<script type='text/javascript' src='leedwr/interface/hello.js'>
+	</script>
+</head>
+<body>
+<h3>DWR入门</h3>
+请输入您的名字<input id="name" name="name" type="text"/><br />
+<input type="button" value="发送简单请求" onclick="sendMessage();"/>
+<input type="button" value="发送对象参数" onclick="sendObject();"/>
+<input type="button" value="返回JavaBean" onclick="getBean();"/><br />
+<input type="button" value="返回Object" onclick="getObject();"/>
+<input type="button" value="返回Bean集合" onclick="getBeanList();"/>
+<input type="button" value="返回Bean数组" onclick="getBeanArray();"/><br />
+<input type="button" value="返回Bean Map" onclick="getBeanMap();"/>
+<input type="button" value="发送Bean集合" onclick="sendBeanList();"/>
+<input type="button" value="发送不带泛型限制的Bean集合"
+	onclick="sendBeanListNoGeneric();"/><br />
+<input type="button" value="发送Bean Map" onclick="sendBeanMap();"/>
+<hr />
+下面是服务器的回应:<br />
+<div id= "show"></div>
+</body>
+</html>

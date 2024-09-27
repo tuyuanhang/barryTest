@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 各种列类型 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入CheckColumn列类型必需的CSS样式单 -->
+	<link href="css/CheckHeader.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+	<!-- 导入CheckColumn列类型所需的JavaScript库 -->
+	<script type="text/javascript" src="CheckColumn.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 初始化工具提示
+	Ext.tip.QuickTipManager.init();
+	// 创建一个Ext.data.Store对象
+	var userStore = Ext.create('Ext.data.Store', 
+	{
+		// 直接使用data指定数据
+		data : [
+			{name: "孙悟空", isMarried: false , birthDate: '0178-12-12',
+				height: 1.65},
+			{name: "猪八戒", isMarried: false , birthDate: '0278-12-12',
+				height: 1.65},
+			{name: "玉帝", isMarried: true , birthDate: '0168-12-12',
+				height: 1.65},
+			{name: "宋江", isMarried: true , birthDate: '1178-12-12',
+				height: 1.65}
+		],
+		fields:[
+			'name' , 'isMarried',
+			{name: 'birthDate', type: 'date', format:'Y-m-d'},
+			'height'
+		]
+	});
+	Ext.create('Ext.grid.Panel', {
+		title: '查看用户',
+		width: 650, // 指定表单宽度
+		renderTo: Ext.getBody(),
+		// 定义该表格包含的所有数据列
+		columns: [
+			// 定义一个列序号列。
+			{ text: '序号' , xtype: 'rownumberer' , width:30},
+			// 没指定xtype，默认是普通列类型
+			{ text: '人名', dataIndex: 'name'},
+			// 定义一个Boolean列
+			{ text: '是否已婚', xtype: 'booleancolumn', trueText: '已婚',
+				falseText: '未婚', dataIndex: 'isMarried'},
+			// 定义一个CheckBox列
+			{ text: '是否已婚', xtype: 'checkcolumn',
+				dataIndex: 'isMarried', width: 55 , cls:'x-grid-checked'},
+			// 定义一个日期列
+			{ text: '出生时间', xtype: 'datecolumn',
+				dataIndex: 'birthDate', format:'Y年m月d日'},
+			// 定义一个数值列
+			{ text: '身高', xtype: 'numbercolumn', width: 60,
+				dataIndex: 'height', format:'0.00米' },
+			{ text: '描述', xtype: 'templatecolumn', 
+				tpl: '人名:{name},身高:{height}' , flex:1},
+			{
+				text: '操作',
+				xtype:'actioncolumn',
+				width: 50,
+				items: [
+					{
+						icon: 'edit.gif', // 指定图标
+						tooltip: '编辑',
+						handler: function(grid, rowIndex, colIndex)
+						{
+							var rec = grid.getStore().getAt(rowIndex);
+							alert("编辑【" + rec.get('name') + "】用户");
+						}
+					},
+					{
+						icon: 'delete.gif', // 指定图标
+						tooltip: '删除',
+						handler: function(grid, rowIndex, colIndex) 
+						{
+							var rec = grid.getStore().getAt(rowIndex);
+							alert("删除【" + rec.get('name')+ "】用户");
+						}
+					}
+				]
+			}
+		],
+		store: userStore
+	});
+});
+</script>
+</body>
+</html>

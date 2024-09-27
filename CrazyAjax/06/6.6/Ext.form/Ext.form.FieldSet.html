@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.FieldSet </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.create('Ext.form.Panel', 
+	{
+		title: '使用Ext.form.FieldSet',
+		labelWidth: 75, // 为所有标签设置宽度
+		url: 'save-form.php',
+		frame: true,
+		bodyPadding: 5,
+		width: 500,
+		layout: 'column', // 指定使用“列布局”
+		renderTo: Ext.getBody(),
+		// 为所有表单控件设置默认配置
+		defaults: {
+			bodyPadding: 4
+		},
+		items: [
+			{
+				// 定义第一个控件集容器
+				xtype:'fieldset',
+				columnWidth: 0.48, // 设置第一列的宽度
+				title: '第一个FieldSet', // 设置控件集容器的标题
+				// 设置在控件集容器标题显示折叠按钮，
+				// 该按钮可控制该控件集容器的折叠/展开状态
+				collapsible: true, 
+				defaultType: 'textfield',
+				// 设置该FieldSet的默认选项
+				defaults: {anchor: '100%'},
+				layout: 'anchor',
+				// 在控件集容器中定义2个单行文本框
+				items :[
+					{
+						fieldLabel: '用户名',
+						name: 'name'
+					}, 
+					{
+						fieldLabel: '密码',
+						name: 'passwd'
+					}
+				]
+				
+			},
+			{
+				// 定义第一个控件集容器
+				xtype:'fieldset',
+				title: '第二个FieldSet',// 设置控件集容器的标题
+				columnWidth: 0.48,
+				// 设置在控件集容器标题显示复选框
+				// 该复选框可控制该控件集容器的折叠/展开状态
+				checkboxToggle: true,
+				collapsed: true, // 设置该控件集容器初始处于折叠状态。
+				layout:'anchor',
+				items :[
+					// 在控件集容器中定义一个普通Panel
+					{
+						xtype: 'panel',
+						anchor: '100%',
+						title: '普通Panel',
+						frame: true,
+						height: 52
+					}
+				]
+			}
+		]
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> JSON支持 </title>
+</head>
+<body>
+<script src="../prototype.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+var date = new Date();
+// 将Date对象转化成JSON字符串
+document.writeln("日期对应的JSON字符串为：" + date.toJSON() + "<br />");
+var p = {
+	name : "yeeku",
+	age : 30
+};
+// 将对象转换成JSON字符串
+document.writeln("普通对象的JSON字符串为：" + Object.toJSON(p) + "<br />");
+var books = ["疯狂Java讲义" , "疯狂Ajax讲义"];
+// 将数组转换成JSON字符串
+document.writeln("数组的JSON字符串为：" + Object.toJSON(books) + "<br />");
+var hash = $H({name: 'yeeku', age : 30});
+// 将Hash对象转换成JSON字符串
+document.writeln("Hash对象的JSON字符串为：" + Object.toJSON(hash) + "<br />");
+// 将数值转换成JSON字符串
+document.writeln("数值的JSON字符串为：" + Object.toJSON(45) + "<br />");
+// 下面四行代码测试怎样才算合法的字符串
+document.writeln('"crazyit".isJSON()的结果为：' 
+	+ "crazyit".isJSON() + "<br />");
+document.writeln('"\"crazyit\"".isJSON()的结果为：' 
+	+ "\"crazyit\"".isJSON() + "<br />");
+document.writeln('"{age: 30}.isJSON()的结果为：' 
+	+ "{age: 30}".isJSON() + "<br />");
+document.writeln('"{\"age\": 30}".isJSON()的结果为：' 
+	+ "{\"age\": 30}".isJSON() + "<br />");
+// 定义一个JSON格式的字符串
+var str = '{"name": "yeeku", "age": 30}';
+// 将JSON格式的字符串转换成JSON对象
+var author = str.evalJSON();
+document.writeln('author对象的name值为：' + author.name + "<br />");
+document.writeln('author对象的age值为：' + author.age + "<br />");
+</script>
+</body>
+</html>

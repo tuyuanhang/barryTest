@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 数据分页 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 定义一个Book Model
+	Ext.define('Book', {
+		extend: 'Ext.data.Model',
+		fields: [
+			{name: 'id' , type: 'int'},
+			{name: 'name', type: 'string'},
+			{name: 'author', type: 'string'},
+			{name: 'price', type: 'float'},
+		]
+	});
+	// 创建一个Ext.data.Store对象
+	var bookStore = Ext.create('Ext.data.Store', 
+	{
+		// 指定使用Book Model管理记录
+		model: 'Book',
+		pageSize: 2, // 设置每页显示2条记录
+		// 使用proxy指定加载远程数据
+		proxy: 
+		{
+			type: 'ajax',
+			url: 'getBooksByPage',// 向该URL发送Ajax请求
+			reader: { // 使用Ext.data.reader.Json读取服务器数据
+				type: 'json',
+				totalProperty: 'total',
+				root: 'data' // 直接读取服务器响应的data数据
+			},
+		},
+		autoLoad:true
+	});
+	Ext.create('Ext.grid.Panel', {
+		title: '查看服务器端图书',
+		width: 550, // 指定表单宽度
+		renderTo: Ext.getBody(),
+		// 定义该表格包含的所有数据列
+		columns: [
+			{ text: '图书ID', dataIndex: 'id' , flex: 1 }, // 第1个数据列
+			{ text: '书名', dataIndex: 'name' , flex: 1 }, // 第2个数据列
+			{ text: '作者', dataIndex: 'author', flex: 1 }, // 第3个数据列
+			{ text: '价格', dataIndex: 'price' , flex: 1 }, // 第4个数据列
+		],
+		store: bookStore,
+		// 定义分页工具条
+		bbar:{
+			xtype: 'pagingtoolbar',
+			store: bookStore, // 指定该分页工具条控制bookStore的数据加载
+			displayInfo: true,
+			refreshText:'aa'
+		}
+	});
+});
+</script>
+</body>
+</html>

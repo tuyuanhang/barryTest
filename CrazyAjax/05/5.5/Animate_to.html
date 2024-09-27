@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 对元素使用动画 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		var target = Ext.get("a");
+		// 开始执行动画
+		target.animate({
+			// 指定动画持续时间
+			duration: 2000,
+			// 指定动画的结束状态
+			to: {
+				width: 350,
+				height: 130,
+				backgroundColor: '#faa',
+				opacity: 0.5
+			}
+		});
+	});
+</script>
+<div id="a" style="background-color:#afa">fkjava</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>文件上传</title>
+</head>
+<body>
+<input type="file" id="photo"/>
+<input type="button" onclick="upload();" value="上传图片"/>
+<ul id="result"></ul>
+<img alt='显示图片' id='show'/>
+<script type='text/javascript' src='leedwr/engine.js'></script>
+<script type='text/javascript' src='leedwr/util.js'></script>
+<script type='text/javascript' src='leedwr/interface/uploader.js'>
+</script>
+<script type='text/javascript'>
+	var upload = function()
+	{
+		// 获取photo文件上传框的值，既可能是文件名，也可能是文件路径
+		var fileName = $('photo').value;
+		alert(fileName);
+		// 如果fileName字符串中包含\路径分隔符
+		if(fileName.indexOf('\\') > 0)
+		{
+			// 获取最后一个路径分隔符（\）之后的内容，也就是获取文件名
+			fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
+		}
+		// 如果fileName字符串中包含/路径分隔符
+		if(fileName.indexOf('/') > 0)
+		{
+			// 获取最后一个路径分隔符（/）之后的内容，也就是获取文件名
+			fileName = fileName.substring(fileName.lastIndexOf("/") + 1);
+		}
+		uploader.uploadFile($('photo') , fileName
+			, function(data)
+			{
+				// 删除下拉列表中的全部列表项
+				dwr.util.removeAllOptions("result");
+				// 遍历data数组，将服务器端所有图片文件列出来。
+				for(var i = 0 ; i < data.length ; i++)
+				{
+					// 创建一个li元素
+					var li = document.createElement('li');
+					// 设置li元素的内容
+					li.innerHTML = '<a href="#" onclick="$(\'show\').src=\'upload/'
+						+ data[i] + '\';">'
+						+ data[i] + '</a>';
+					// 添加li元素
+					$('result').appendChild(li);
+				}
+				$('photo').value = '';
+			});
+	}
+</script>
+</body>
+</html>

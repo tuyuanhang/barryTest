@@ -1,0 +1,23 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<!-- 导入Ext JS国际化所需的JavaScript库 -->
+<script type="text/javascript" src="../ext-lang-zh_CN.js">
+</script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.define('Book', {
+		extend: 'Ext.data.Model',
+		fields: [
+			{name: 'name',  type: 'string'},
+			{name: 'author',   type: 'string'},
+			{name: 'price', type: 'float'},
+			{name: 'publishDate', type: 'date', dateFormat:'y-m-d'}
+		],
+		changeName: function(newName) 
+		{
+			this.set('name', newName);
+		}
+	});
+});
+</script>

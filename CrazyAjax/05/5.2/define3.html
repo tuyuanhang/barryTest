@@ -1,0 +1,23 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+Ext.define("Crazyit.User",
+	{
+		// 指定配置选项
+		config : {
+			name: "fkjava",
+			password: "1234"
+		},
+		// 定义构造器，直接接受config指定的选项
+		constructor: function(cfg) 
+		{
+			this.initConfig(cfg);
+		}
+	});
+var user = new Crazyit.User();
+// User类的name、password属性拥有对应的setter和getter方法
+user.setName("crayit");
+user.setPassword("9876");
+alert(user.getName() + user.getPassword());
+</script>

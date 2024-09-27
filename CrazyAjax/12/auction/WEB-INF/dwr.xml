@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE dwr PUBLIC 
+	"-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN"
+	"http://getahead.org/dwr/dwr30.dtd">
+<dwr>
+	<allow>
+		<!-- 使用spring创建器，创建一个名为am的JavaScript对象 -->
+		<create creator="spring" javascript="am"> 
+			<!-- 将Spring容器中的auctionDwr创建成名为am的对象 -->
+			<param name="beanName" value="auctionDwr"/>
+			<!-- 使用include元素定义哪些方法将被暴露到客户端 -->
+			<include method="getItemByWiner"/>
+			<include method="getFailItems"/>
+			<include method="validLogin"/>
+			<include method="getBidByUser"/>
+			<include method="getItemsByOwner"/>
+			<include method="getAllKind"/>
+			<include method="addItem"/>
+			<include method="addKind"/>
+			<include method="getItemsByKind"/>
+			<include method="getKind"/>
+			<include method="getItem"/>
+			<include method="addBid"/>
+			<include method="getKind"/>
+		</create>
+		<!-- 定义使用Bean转换器处理如下Java类 -->
+		<convert converter="bean"
+			match="org.crazyit.auction.business.BidBean"/>
+		<convert converter="bean"
+			match="org.crazyit.auction.business.ItemBean"/>
+		<convert converter="bean"
+			match="org.crazyit.auction.business.KindBean"/>
+		<convert converter="bean"
+			match="org.crazyit.auction.exception.AuctionException"/>
+	</allow>
+</dwr>

@@ -1,0 +1,23 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+Ext.define("Crazyit.Animal",
+	{
+		weight: 30.0
+	});
+Ext.define('Crazyit.Dog', {
+	// 指定该类继承了Crazyit.Animal
+	extend: Crazyit.Animal,
+	// 定义构造器
+	constructor: function(name , age) 
+	{
+		this.name = name;
+		this.age = age;
+	}
+});
+var d = new Crazyit.Dog("Snoopy" , 2);
+document.writeln("d的名字为：" + d.name + "<br/>"
+	+ "d的年龄是：" + d.age + "<br/>"
+	+ "d的重量是：" + d.weight);
+</script>

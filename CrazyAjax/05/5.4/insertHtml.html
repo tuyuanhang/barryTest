@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 插入HTML字符串 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		// 分别在a节点的4个位置插入HTML字符串
+		Ext.fly("a").insertHtml("beforeBegin" , "<div>开始之前的内容</div>");
+		Ext.fly("a").insertHtml("afterBegin" , "<div>开始之后的内容</div>");
+		Ext.fly("a").insertHtml("beforeEnd" , "<div>结束之前的内容</div>");
+		Ext.fly("a").insertHtml("afterEnd" , "<div>结束之后的内容</div>");
+		Ext.select("div>div")
+			.setStyle("background-color" , "#aff");
+	});
+</script>
+<div id="a" style="border:1px solid black;height:60px">fkjava</div>
+</body>
+</html>

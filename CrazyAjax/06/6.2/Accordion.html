@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 折叠布局 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	Ext.create('Ext.panel.Panel', {
+		title: '<h1>疯狂在线办公系统</h1>',
+		width: 260, // 设置宽度
+		height: 300, // 设置高度
+		// 采用可折叠布局
+		layout:'accordion',
+		items: [
+			// 第一个元素
+			{
+				title: '员工系统',
+				html: '<h3>员工系统功能列表</h3>'
+			},
+			// 第二个元素
+			{
+				title: '考勤系统',
+				html: '<h3>考勤系统功能列表</h3>'
+			},
+			// 第三个元素
+			{
+				title: '邮件系统',
+				html: '<h3>邮件系统功能列表</h3>'
+			},
+			// 第四个元素
+			{
+				title: '公文系统',
+				html: '<h3>公文系统功能列表</h3>'
+			}
+		],
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

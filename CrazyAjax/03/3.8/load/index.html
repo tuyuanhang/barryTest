@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 使用jQuery的load方法 </title>
+</head>
+<body>
+<h3>请输入你的信息：</h3>
+<form id="userForm">
+	用户名:<input type="text" name="user" /><br />
+	喜欢的图书:<select multiple="multiple" name="books">
+		<option value="java">疯狂Java讲义</option>
+		<option value="javaee">轻量级Java EE企业应用实战</option>
+		<option value="ajax">疯狂Ajax讲义</option>
+		<option value="xml">疯狂XML讲义</option>
+	</select><br />
+	<input id="load" type="button" value="Load"/>
+</form><hr />
+<div id="show"></div>
+<script src="jquery-1.8.0.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+	// 为id为load的按钮绑定事件处理函数
+	$("#load").click(function()
+	{
+		// 向pro发送Ajax请求，并自动加载服务器响应
+		$("#show").load("pro" , $("#userForm").serializeArray());
+	});
+</script>
+</body>
+</html>

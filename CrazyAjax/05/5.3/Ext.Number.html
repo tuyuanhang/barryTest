@@ -1,0 +1,25 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	document.writeln("20截取到10~30范围内："
+		+ Ext.Number.constrain(20, 10, 30) + "<br/>");
+	document.writeln("35截取到10~30范围内："
+		+ Ext.Number.constrain(35, 10, 30) + "<br/>");
+	document.writeln("7截取到10~30范围内："
+		+ Ext.Number.constrain(7, 10, 30) + "<br/>");
+	document.writeln("字符串123转换为数值："
+		+ Ext.Number.from("123" , 20) + "<br/>");
+	document.writeln("字符串abc转换为数值："
+		+ Ext.Number.from("abc" , 20) + "<br/>"); 
+	document.writeln("返回离23最近的7的倍数(必须在10~30之间)："
+		+ Ext.Number.snap(23 , 7 , 10 , 30) + "<br/>"); 
+	document.writeln("返回离27最近的7的倍数(必须在10~30之间)："
+		+ Ext.Number.snap(27 , 7 , 10 , 30) + "<br/>"); 
+	document.writeln("返回离13最近的3的倍数(必须在20~30之间)："
+		+ Ext.Number.snap(13 , 3 , 20 , 30) + "<br/>"); 
+	document.writeln("34.215保留2位小数点："
+		+ Ext.Number.toFixed(34.215 , 2)+ "<br/>"); 
+	document.writeln("3.5218保留1位小数点："
+		+ Ext.Number.toFixed(3.2545 , 1)+ "<br/>");
+</script>

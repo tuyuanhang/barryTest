@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.field.File上传文件 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.create('Ext.form.Panel', {
+		title: '上传照片',
+		width: 400,
+		bodyPadding: 10,
+		frame: true,
+		renderTo: Ext.getBody(),
+		items: [
+			{
+				xtype: 'filefield',
+				name: 'photo', // 设置该文件上传空间的name，也就是请求参数的名字
+				fieldLabel: '个人照片',
+				labelWidth: 80,
+				msgTarget: 'side',
+				allowBlank: false,
+				anchor: '100%',
+				buttonText: '选择照片...', // 浏览按钮的文本
+				emptyText: '还没有选择照片'
+			}
+		],
+		buttons: [
+			{
+				text: '上传',
+				handler: function() {
+					var form = this.up('form').getForm();
+					// 如果该表单有效，提交表单
+					if(form.isValid()){
+						form.submit({
+							url: 'photoUpload',// 上传请求交给photoUplaod处理
+							// 指定等待信息
+							waitMsg: '正在上传照片，请等待...',
+							success: function(fp, o) 
+							{
+								// 创建窗口
+								Ext.create('Ext.window.Window',
+								{
+									title: '照片上传成功',
+									width: 400, // 指定宽度
+									height: 220, // 指定高度
+									autoScroll: true,
+									items:[
+										{
+											xtype:'image',
+											src: 'uploadFiles/' + o.result.file
+										}
+									]
+								}).show();
+							}
+						});
+					}
+				}
+			}
+		]
+	});
+});
+</script>
+</body>
+</html>

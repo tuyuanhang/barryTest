@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 卡片布局 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	var navigate = function(panel, direction)
+	{
+		// 获取panel的布局管理器
+		var layout = panel.getLayout();
+		// 根据"prev"或"next"字符串控制显示上一个、下一个Card中的组件
+		layout[direction]();
+		// 如果layout没有上一张Card，禁用move-prev按钮，否则启用该按钮
+		Ext.getCmp('move-prev').setDisabled(!layout.getPrev());
+		// 如果layout没有下一张Card，禁用move-next按钮，否则启用该按钮
+		Ext.getCmp('move-next').setDisabled(!layout.getNext());
+	};
+	Ext.create('Ext.panel.Panel', {
+		title: '安装向导',
+		width: 300,
+		height: 200,
+		layout: 'card',// 使用卡片布局
+		bodyPadding: 10,
+		// 对所有子组件都起作用的设置
+		defaults: {
+			border: false // 不使用边框
+		},
+		// 在底部添加工具条
+		bbar: [
+			{
+				id: 'move-prev',
+				text: '上一步',
+				handler: function(btn) 
+				{
+					// 调用navigate函数打开上一个Card中的组件
+					navigate(btn.up("panel"), "prev");
+				},
+				disabled: true // 默认不可用
+			},
+			{xtype: 'tbfill'}, // 设置位置填充符
+			{
+				id: 'move-next',
+				text: '下一步',
+				handler: function(btn)
+				{
+					// 调用navigate函数打开上一个Card中的组件
+					navigate(btn.up("panel"), "next");
+				}
+			}
+		],
+		// 定义子组件
+		items: [
+			{
+				id: 'card-0',
+				html: '<h1>欢迎加入疯狂Java</h1><p>总共有4步，这是第1步</p>'
+			},
+			{
+				id: 'card-1',
+				html: '<p>总共有4步，这是第2步</p>'
+			},
+			{
+				id: 'card-2',
+				html: '<p>总共有4步，这是第3步</p>'
+			},
+			{
+				id: 'card-3',
+				html: '<h1>完成！</h1><p>总共有4步，这是第4步</p>'
+			}
+		],
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

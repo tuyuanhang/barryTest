@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 简单拖放元素 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 定义一个数组
+	var arr = ['book' , 'pad'];
+	// 采用循环遍历数组
+	Ext.Array.each(arr , function(ele , index)
+	{
+		// 将ele元素创建成拖动源
+		// 并指定将该元素放入ele拖放组中
+		var proxy = new Ext.dd.DragSource(ele ,{group: ele});  //①
+		// 将ele+'Target'元素创建成“放目标”
+		var target=new Ext.dd.DDTarget(ele + 'Target', ele);    //②
+		// 为拖动源的“放下”事件绑定事件处理函数
+		proxy.afterDragDrop=function(target , e , id)
+		{
+			// 获取放下事件的目标元素
+			var destEl = Ext.get(id);	
+			// 获取拖动的源元素
+			var srcEl = proxy.getEl();
+			// 复制srcEl元素
+			var newEl = srcEl.cloneNode(true);
+			// 将newEl元素添加到destEl元素的后面
+			Ext.get(newEl).appendTo(destEl);
+		};
+	});
+});
+</script>
+<img id="book" src="images/ajax.png"/>
+<img id="pad" src="images/ipad.png"/>
+<div id="bookTarget" style="border:1px solid black;width:400px;height:140px">
+<div><b>图书购物车</b></div>
+</div>
+<div id="padTarget" style="border:1px solid black;width:400px;height:100px">
+<div><b>电子产品购物车</b></div>
+</div>
+</body>
+</html>

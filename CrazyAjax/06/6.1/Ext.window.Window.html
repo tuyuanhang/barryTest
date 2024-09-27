@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.window.Window创建窗口 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建窗口
+	Ext.create('Ext.window.Window',
+	{
+		title: '查询图书',
+		width: 400, // 指定宽度
+		height: 220, // 指定高度
+		// 直接通过html指定该Panel显示的内容，不指定items属性
+		html: '疯狂Java体系图书',
+		// 为该Panel设置工具按钮
+		// 无需指定xtype属性，默认就是tool值，即工具按钮。
+		tools:[
+			{
+				type:'save',
+				tooltip: '保存数据',
+				handler: function(event, toolEl, panel)
+				{
+					alert("用户保存数据");
+				}
+			}
+		],
+		dockedItems: [
+			{
+				xtype: 'toolbar',
+				dock: 'bottom',
+				items: [
+					{
+						text: '按钮一'
+					},
+					// 直接使用空格添加空白分隔符
+					' ',
+					// 直接使用中划线添加分隔符
+					'-',
+					// 直接使用字符串添加文本项
+					'普通文本',
+					// 添加空白分隔符
+					{xtype: 'tbspacer'},
+					'合计信息',
+					// 添加分隔符
+					{xtype: 'tbseparator'},
+					// 添加填充符
+					{xtype: 'tbfill'},
+					{
+						text: '按钮二'
+					},
+				]
+			}
+		]
+	// 显示窗口
+	}).show();
+});
+</script>
+</body>
+</html>

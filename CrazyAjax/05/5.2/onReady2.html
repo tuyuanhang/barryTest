@@ -1,0 +1,13 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	var fn = function()
+	{
+		alert("此用户的名字是：" + this.name);
+	}
+	var user = {
+		name : "孙悟空"
+	}
+	Ext.onReady(fn , user);
+</script>

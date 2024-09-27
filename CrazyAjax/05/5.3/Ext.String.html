@@ -1,0 +1,19 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	// 对字符串的首字母大写
+	document.writeln("i love JavaScript首字母大写:"
+		+ Ext.String.capitalize("i love JavaScript") + "<br/>");
+	// 返回HTML字符串的源码
+	document.writeln("<b>疯狂Java讲义</b>的HTML源码为:"
+		+ Ext.String.htmlEncode("<b>疯狂Java讲义</b>") + "<br/>");
+	document.writeln("java字符串重复3次"
+		+ Ext.String.repeat("java" , 3 , "/") + "<br/>");
+	// 对字符串模板进行替换
+	document.writeln(Ext.String.format("疯狂Java图书有<br/>{0}<br/>{1}<br/>{2}"
+		, "疯狂Java讲义" , "轻量级Java EE企业应用实战" , "疯狂Ajax讲义"));
+	// 对字符串进行补长
+	document.writeln("JavaScript补长到15个字符:"
+		+ Ext.String.leftPad("JavaScript", 15 , "-"));
+</script>

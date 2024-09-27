@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Action </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+		.copy {
+			background: url('copy.gif') no-repeat ;
+		}
+		.delete {
+			background: url('delete.gif') no-repeat ;
+		}
+	</style>
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建第一个Action
+	var action1 = Ext.create('Ext.Action', 
+	{
+		text: '复制', // 定义文本
+		iconCls: 'copy', // 定义图标
+		handler: function() // 定义该Action对应的事件处理函数
+		{
+			Ext.Msg.alert('复制', '您已经完成了内容复制！');
+		}
+	});
+	// 创建第二个Action
+	var action2 = Ext.create('Ext.Action', 
+	{
+		text: '删除', // 定义文本
+		iconCls: 'delete', // 定义图标
+		handler: function() // 定义该Action对应的事件处理函数
+		{
+			Ext.Msg.alert('删除', '您已经删除了内容！');
+		}
+	});
+	var panel = Ext.create('Ext.panel.Panel', 
+	{
+		title: '使用Action',
+		renderTo: Ext.getBody(),
+		width: 400,
+		height: 150,
+		bodyPadding: 10,
+		dockedItems: 
+		{
+			dock: 'top', // 指定放在顶端
+			itemId: 'toolbar',
+			xtype: 'toolbar', // 指定工具条
+			items: [
+				action1, // 将Action对象添加到工具条上，它将变成一个工具按钮
+				action2, 
+				{
+					text: '编辑',
+					// 将Action对象添加到菜单中，它将变成一个菜单项
+					menu: [action1 , action2]
+				}
+			]
+		},
+		// 将Action添加到按钮中，它变成一个按钮
+		items: [
+			Ext.create('Ext.button.Button', action1),
+			Ext.create('Ext.button.Button', action2)
+		]
+	});
+	// 获取panel组件内部的toolbar组件
+	var toolbar = panel.child('#toolbar');
+	// 正在工具条上动态添加子组件
+	toolbar.add(
+		{xtype : 'tbfill'}, 
+		// 添加按钮
+		{
+			text: '禁用',
+			handler: function()
+			{
+				// 修改action1的禁用状态
+				action1.setDisabled(!action1.isDisabled());
+				// 修改action2的禁用状态
+				action2.setDisabled(!action2.isDisabled());
+				// 修改该按钮本身的文本
+				this.setText(action1.isDisabled() ? '启用' : '禁用');
+			}
+		}
+		,
+		{
+			text: '修改Action文本',
+			handler: function(){
+				Ext.Msg.prompt('输入文本', '为第1个Action输入文本:'
+					, function(btn, text)
+				{
+					if(btn == 'ok' && text)
+					{
+						// 修改Action的文本
+						action1.setText(text);
+						// 修改Action内部包含的事件处理函数
+						action1.setHandler(function()
+						{
+							Ext.Msg.alert('被修改的Action'
+								, 'Action的文本已经被修改了！');
+						});
+					}
+				});
+			}
+		});
+});
+</script>
+</body>
+</html>

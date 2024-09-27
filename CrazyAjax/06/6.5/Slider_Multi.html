@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 滑动条 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="a.css" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.DomHelper.append(Ext.getBody() ,'<h3>多滑块的滑动条</h3>');
+	Ext.create('Ext.slider.Multi', {
+		renderTo: Ext.getBody(),
+		width: 360,// 宽度
+		minValue: 0, // 最小值
+		maxValue: 100, // 最大值
+		values: [10, 50, 90], // 指定3个滑块的值
+		constrainThumbs: false, // 指定各滑块允许“穿越”
+		hideLabel: true,
+	});
+	Ext.DomHelper.append(Ext.getBody() ,'<h3>垂直的多滑块的滑动条</h3>');	
+	Ext.create('Ext.slider.Multi', {
+		renderTo: Ext.getBody(),
+		vertical: true, // 高度
+		height: 120,
+		minValue: 0, // 最小值
+		maxValue: 100, // 最大值
+		values: [10, 50, 90],
+		hideLabel: true
+	});
+}); 
+</script>
+</body>
+</html>

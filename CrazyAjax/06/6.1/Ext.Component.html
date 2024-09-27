@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.Component </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	var comp = Ext.create('Ext.Component', 
+	{
+		html: '疯狂Java讲义<br/>轻量级Java EE企业应用实战<br/>',
+		width: 300, // 宽度
+		height: 200, // 高度
+		padding: 20, // 内补丁距离
+		shadow: true,
+		resizable:true,
+		style: { // 设置样式
+			color: '#f66',
+			backgroundColor:'#afa'
+		},
+		renderTo: Ext.getBody() // 指定将该组件追加到<body.../>元素中
+	});
+	comp.center();
+});
+</script>
+</body>
+</html>

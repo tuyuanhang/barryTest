@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 工具提示 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="a.css" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	// 初始化Ext.tip.QuickTipManager的单例对象
+	Ext.tip.QuickTipManager.init();
+	// 设置Ext.tip.QuickTipManager单例对象的属性
+	Ext.apply(Ext.tip.QuickTipManager.getQuickTip(), 
+	{
+		maxWidth: 200, // 最大宽度
+		minWidth: 100, // 最小宽度
+		showDelay: 50 // 延迟50毫秒后显示提示框
+	});
+	// 创建一个容器，该容器包含两个Ext.panel.Panel
+	Ext.create('Ext.container.Container', {
+		width: 350,
+		height: 90,
+		layout: 'column',
+		renderTo: Ext.getBody(),
+		items: [
+			{
+				id: 'p1',
+				titil : '第1个Panel',
+				width: 100,
+				height: 70,
+				bodyStyle: 'background-color:#afa'
+			},
+			{
+				id: 'p2',
+				titil : '第2个Panel',
+				width: 100,
+				height: 70,
+				bodyStyle: 'background-color:#afa'
+			}
+		]
+	});
+	Ext.tip.QuickTipManager.register({
+		target: 'p1',
+		text: '简单提示信息，提示框的宽度固定为100',
+		width: 100,
+		dismissDelay: 10000 // 指定10秒后自动隐藏
+	});
+	Ext.tip.QuickTipManager.register({
+		target: 'p2',
+		title: '简单提示',
+		text: '带标题的提示信息',
+		dismissDelay: 10000 // 指定10秒后自动隐藏
+	});
+});
+</script>
+</body>
+</html>

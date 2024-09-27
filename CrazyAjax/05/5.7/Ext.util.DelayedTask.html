@@ -1,0 +1,17 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	// 将指定任务包装成延时任务
+	var task = new Ext.util.DelayedTask(function()
+	{
+		alert("最开始包装的函数！");
+	});
+	// 指定延迟1秒执行。
+	task.delay(1000);
+	// 指定task延迟2秒执行，并使用新函数覆盖原有的函数
+	task.delay(2000, function()
+	{
+		alert("采用新定义的函数覆盖原有的函数!");
+	});
+</script>

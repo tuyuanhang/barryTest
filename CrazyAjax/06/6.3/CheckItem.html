@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 可勾选菜单项 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	Ext.create('Ext.menu.Menu', {
+		width: 120, // 菜单宽度
+		floating: false, // 设置不使用绝对定位
+		renderTo: Ext.getBody(),
+		// 定义菜单项
+		items: [
+			{
+				text: '新建',
+				handler: function(item, evt)
+				{
+					alert(item.text + " 菜单被单击了！");
+				}
+			},
+			{xtype: 'menuseparator'},// 菜单分隔条
+			{
+				text: '是否已婚',
+				xtype: 'menucheckitem',
+				checkHandler : function(item , checked)
+				{
+					Ext.Msg.alert('您的婚姻状态' , 
+						checked ? '您已经结婚' : '还未结婚！');
+				}
+			},
+		]
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> $w()函数 </title>
+</head>
+<body>
+<script src="../prototype.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+var str = "www crazyit org";
+// 使用$w将一个字符串转换成字符串数组
+var strArray = $w(str);
+// 依次输出每个字符串数组中的每个字符
+for (var i = 0 ; i < strArray.length ; i++)
+{
+	document.writeln(strArray[i] + "<br />");
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 添加HTML节点 </title>
+</head>
+<body>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<script type="text/javascript" src="../jquery-1.8.0.js">
+</script>
+<script type="text/javascript">
+	// 定义一个数组
+	var books = [
+		{name: "疯狂Java讲义" , price:109},
+		{name: "轻量级Java EE企业应用实战" , price:89},
+		{name: "疯狂Android讲义" , price:89}]
+	// 使用函数为不同div元素动态添加不同的内容
+	$("body>div").append(function(i)
+	{
+		// i代表jQuery对象中正在迭代处理的元素的索引，因此为0、1、2...
+		return "<b>书名是《" + books[i].name
+			+ "》,价格是:" + books[i].price;
+	})
+</script>
+</body>
+</html>

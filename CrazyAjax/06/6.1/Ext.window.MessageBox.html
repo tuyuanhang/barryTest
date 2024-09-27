@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.Msg </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+		.fkjava{
+			background:url("icon.png") no-repeat;
+
+		}
+	</style>
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<button onclick='Ext.Msg.alert("提醒", "这是一个警告对话框" 
+	, function()
+	{
+		Ext.DomHelper.overwrite("target" , id +"按钮被单击");
+	})'>
+	警告对话框</button>
+<button onclick='Ext.Msg.confirm("确认", "这是一个确认对话框" 
+	, function(id)
+	{
+		Ext.DomHelper.overwrite("target" , id + "按钮被单击");
+	})'>
+	确认对话框</button>
+<button onclick='Ext.Msg.prompt("输入", "这是一个输入对话框" 
+	, function(id , txt)
+	{
+		Ext.DomHelper.overwrite("target" , id 
+			+ "按钮被单击<br/>输入的名字是:" + txt);
+	}
+	, true, "请输入名字")'>
+	输入对话框</button>
+<button onclick='var percent = 0;
+	var progress = Ext.Msg.progress("上传文件"
+	, "文件上传中..."
+	, "文件正在上传...");
+	// 启动任务来修改进度条的进度
+	Ext.TaskManager.start({
+		// 指定任务包装的函数
+		run: function()
+		{
+			progress.updateProgress(percent += 0.05);
+			// 进度完成时，关闭进度对话框
+			if(percent >= 1.0)
+			{
+				progress.close();
+			}
+		},
+		// 指定每隔0.2秒执行一次
+		interval: 200,
+		// 指定重复次数
+		repeat:20
+	});'>
+	进度条对话框</button>
+<button onclick='var msg = Ext.Msg.wait("请等待", "等待任务执行..."
+	, {interval: 500, //bar will move fast!
+	duration: 5000,
+	increment: 10,
+	text: "请等待...",
+	scope: this,
+	fn: function(){
+		Ext.DomHelper.overwrite("target" , "等待结束，请继续操作！");
+		msg.close();
+	}
+	})'>等待</button>
+<button onclick='Ext.Msg.show({title:"选项" , msg:"这是选项对话框",
+	multiline:true , buttons:Ext.Msg.YESNOCANCEL,
+	progress:true,icon:"fkjava",
+	fn:function(id){Ext.DomHelper.overwrite("target" , id + "按钮被单击");}})'>
+	选项对话框</button>
+<div id="target"></div>
+</body>
+</html>

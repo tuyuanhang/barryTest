@@ -1,0 +1,25 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+Ext.define("Crazyit.User",
+	{
+		// 定义静态成员，这些静态成员可以被子类继承
+		config: {
+			name:"fkjava",
+			password:"8888"
+		},
+		// 定义构造器，直接接受config指定的选项
+		constructor: function(cfg) 
+		{
+			this.initConfig(cfg);
+		}
+	});
+// 创建一个Crazyit.User对象
+var user = Ext.create("Crazyit.User",
+	{
+		name: "孙悟空",
+		password: "1234"
+	});
+alert(user.name + "-->" + user.password);
+</script>

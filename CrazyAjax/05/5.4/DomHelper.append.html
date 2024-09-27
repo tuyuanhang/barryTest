@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Ext.DomHelper </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		// 将新创建的对象添加成a元素的最后一个子节点
+//		Ext.DomHelper.overwrite("a" ,
+		Ext.DomHelper.append("a" ,     //①
+		// 根据如下对象创建HTML元素
+		{
+			tag : "table", // 指定创建表格
+			// 下面两个属性直接附加到表格上
+			style: "border-collapse:collapse",
+			width: "540px",
+			// 指定子元素，也可使用children属性
+			cn:[
+				{
+					tag: "tr",
+					html: "<td>疯狂Java讲义</td><td>109</td>"
+				},
+				{
+					tag: "tr",
+					html: "<td>疯狂Android讲义</td><td>89</td>"
+				}
+			]
+		});
+		// 为所有td元素添加border样式
+		Ext.select("td")
+			.setStyle("border" , "1px solid black");
+		alert(Ext.DomHelper.markup(
+		{
+			html:"crazyit.org"
+		}));
+	});
+</script>
+<div id="a" style="height:75px;border:1px solid black;">fkjava</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.field.Number </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.create('Ext.form.Panel', 
+	{
+		title: '选择价格',
+		width: 300,
+		bodyPadding: 10,
+		renderTo: Ext.getBody(),
+		items: [
+			{
+				xtype: 'numberfield', // 指定为数值输入框
+				anchor: '100%',
+				name: 'minPrice', 
+				fieldLabel: '最低价格', // 为表单控件指定标签
+				value: 40, // 指定表单控件的当前值。
+				maxValue: 50, // 指定表单控件的最大值。
+				minValue: 10 // 指定表单控件的最小值。
+			},
+			{
+				xtype: 'numberfield',
+				anchor: '100%',
+				name: 'maxPrice',
+				fieldLabel: '最大价格', // 为表单控件指定标签
+				value: 80, // 指定表单控件的当前值。
+				maxValue: 100, // 指定表单控件的最大值。
+				minValue: 50 // 指定表单控件的最小值。
+			}
+		],
+		buttons: [
+			{
+				text: '减少最小值',
+					handler: function() {
+					// 获取表单中name为minPrice的组件，
+					// 调用spinDown()方法减少数值输入框的值
+					this.up('form').down('[name=minPrice]').spinDown();
+				}
+			},
+			{
+				text: '增加最大值',
+					handler: function() {
+					// 获取表单中name为minPrice的组件，
+					// 调用spinDown()方法增大数值输入框的值
+					this.up('form').down('[name=maxPrice]').spinUp();
+				}
+			}
+		]
+	});
+});
+</script>
+</body>
+</html>

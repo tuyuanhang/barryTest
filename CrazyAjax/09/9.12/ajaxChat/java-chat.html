@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 反向Ajax的聊天室 </title>
+</head>
+<!-- 本页面启用反向Ajax -->
+<body onload="dwr.engine.setActiveReverseAjax(true);">
+<script type='text/javascript' src='./leedwr/engine.js'></script>
+<script type='text/javascript' src='./leedwr/util.js'></script>
+<script type='text/javascript' src='./leedwr/interface/chat.js'>
+</script>
+<script type="text/javascript">
+function sendMessage()
+{
+	// 调用远程Java方法，无需回调函数
+	chat.addMessage(dwr.util.getValue("text"));
+}
+</script>
+<h3>反向Ajax的聊天室</h3>
+<div style="width:460px; height:200px;border:1px solid #999999">
+<ul id="chatlog"></ul>
+</div><br/>
+输入您的聊天信息:
+<input id="text" onkeypress="dwr.util.onReturn(event, sendMessage);"/>
+<input type="button" value="发送" onclick="sendMessage()"/>
+</body>
+</html>

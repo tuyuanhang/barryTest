@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> util.js测试 </title>
+</head>
+<body>
+<select id="test"></select>
+<input type="button" value="添加选项" onclick="add();"/>
+<input type="button" value="删除选项" onclick="del();"/>
+<script src="../util.js" type="text/javascript"></script>
+<script type="text/javascript">
+var book = {
+	name : "疯狂Java讲义",
+	price : "99",
+	publish : "电子工业出版社" 
+}
+function add()
+{
+	// 以对象为列表框添加列表项
+	// 对象的每个属性值将作为列表项的文本。
+	// 对象的每个属性名将作为列表项的值
+	dwr.util.addOptions("test" , book);
+}
+function del()
+{
+	// 删除下拉列表中的全部列表项
+	dwr.util.removeAllOptions("test");
+}
+</script>
+</body>
+</html>

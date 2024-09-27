@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>图片切割</title>
+	<script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+	<script type="text/javascript" src="js/jquery.imagecropper.js"></script>
+</head>
+<body>
+	<div id="outer">
+	<div class="jcExample">
+		<div class="article">
+		<h2>图片切割示例</h2>
+		<img src="Images/Img01.jpg" id="cropbox" />
+		<form action="CropImage.ashx" method="post"
+			onsubmit="return checkCoords();">
+			<input type="hidden" id="x" name="x" />
+			<input type="hidden" id="y" name="y" />
+			<input type="hidden" id="w" name="w" />
+			<input type="hidden" id="h" name="h" />
+			<input type="hidden" id="p" name="p" value="Images/imgDemo.jpg" />
+			<input type="hidden" id="1" name="1" value="0.9" />
+			<input type="submit" value="确定" class="btn" />
+		</form>
+		</div>
+		<div class="clsPre">
+			<div class="img100">
+				<img src="Images/imgDemo.jpg" class="imgPre" id="img100" />
+			</div><div class="clsAlt">100*100像素</div>
+			<div class="img80">
+				<img src="Images/imgDemo.jpg" class="imgPre" id="img80" />
+			</div><div class="clsAlt">80*80像素</div>
+			<div class="img60">
+				<img src="Images/imgDemo.jpg" class="imgPre" id="img60" />
+			</div><div class="clsAlt">60*60像素</div>
+		</div>
+	</div>
+	</div>
+</body>
+</html>

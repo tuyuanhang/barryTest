@@ -1,0 +1,26 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+Ext.define("Crazyit.Factory",
+	{
+		// 定义静态成员，这些静态成员可以被子类继承
+		inheritableStatics: {
+			desc : "制造产品的地方",
+			make : function()
+			{
+				alert("工厂制造产品");
+			}
+		}
+	});
+// 调用Crazyit.Factory的静态属性和静态方法
+alert(Crazyit.Factory.desc);
+Crazyit.Factory.make();
+Ext.define("Crazyit.ComputerFactory",
+	{
+		extend: Crazyit.Factory
+	}
+);
+// 直接调用它的父类的静态方法
+Crazyit.ComputerFactory.make();
+</script>

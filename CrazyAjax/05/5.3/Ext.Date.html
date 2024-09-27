@@ -1,0 +1,15 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	// 创建当前日期
+	var d1 = new Date();
+	// 格式化日期对象。
+	document.writeln("d1格式化的结果为："
+		+ Ext.Date.format(d1 , 'Y年m月d日') +"<br/>");
+	alert(new Date(2012, 7 , 15 , 22 , 43));
+	// 计算两个时间的时间差。
+	document.writeln("d1是否在指定时间范围之内："
+		+ Ext.Date.between(d1 , new Date(2010, 7 , 15 , 22 , 43)
+		, new Date(2014 , 10 , 20)) +"<br/>"); 
+</script>

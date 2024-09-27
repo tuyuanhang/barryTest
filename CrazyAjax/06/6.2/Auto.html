@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 自动布局 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	// 创建Ext.panel.Panel组件
+	Ext.create('Ext.panel.Panel', {
+		width: 450, // 宽度
+		height: 240, // 高度
+		title: '自动布局',
+		layout: 'auto', // 使用自动布局
+		renderTo: Ext.getBody(),
+		// 定义两个子组件
+		items: [
+			{
+				xtype: 'panel',
+				title: '第一个Panel',
+				width: '60%',
+				height: 100
+			},
+			{
+				xtype: 'panel',
+				title: '第二个Panel',
+				width: '60%',
+				height: 100
+			}
+		]
+	});
+});
+</script>
+</body>
+</html>

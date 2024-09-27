@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 工具提示 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="a.css" type="text/css" />
+	<style type="text/css">
+		.fkjava{
+			padding: 10px;
+		}
+	</style>
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	// 定义所有按钮的通用配置
+	var defaultButtonConfig = {
+		scale: 'medium',
+		style: {
+			"margin-right": '10px'
+		}
+	};
+	// 定义一个按钮数组
+	var buttons = [{
+			id : 'tip1',
+			text :'简单提示框',
+			renderTo: 'basic'
+		},
+		{
+			id : 'tip2',
+			text : '不自动隐藏的提示框',
+			renderTo: 'basic'
+		},
+		{
+			id : 'track-tip',
+			text :'跟随鼠标的提示框',
+			renderTo: 'basic'
+		},
+		{
+			id : 'leftCallout',
+			text : 'anchor=left且直接使用页面元素作为提示内容',
+			renderTo: 'anchor'
+		},
+		{
+			id : 'bottomCallout',
+			text : 'anchor=top的提示框',
+			renderTo: 'anchor'
+		},
+		{
+			id : 'trackCallout',
+			text : 'anchor=right且跟随鼠标的提示框',
+			renderTo: 'anchor'
+		}
+	];
+	// 遍历每个数组对象
+	Ext.each(buttons, function(config)
+	{
+		// 依次创建每个数组对象
+		Ext.create('Ext.Button' 
+			, Ext.apply(defaultButtonConfig , config));
+	});
+	// 定义一个提示框数组
+	var tooltips = [{
+			target: 'tip1',// 为tip1元素起作用的提示框
+			html: '简单的提示信息'
+		},
+		{
+			target: 'tip2',// 为tip2元素起作用的提示框
+			title: '提示标题',
+			html: '通过右上角的关闭按钮<br/>可以关闭该提示框',
+			autoHide : false, // 不会自动隐藏
+			closable : true, // 可以关闭
+			draggable: true // 可以拖动
+		},
+		{
+			target: 'track-tip',// 为track-tip元素起作用的提示框
+			title: '跟随鼠标的提示框',
+			html: '该提示框会自动跟随鼠标',
+			width: 200,// 设置提示框的宽度
+			trackMouse: true // 设置提示框自动跟随鼠标移动
+		},
+		{
+			id: 'content-anchor-tip',
+			target: 'leftCallout', // 为leftCallout元素起作用的提示框
+			title: '<a href="#">使用页面元素作为提示</a>',
+			html: null, // 不指定html选项
+			width: 140, // 设置宽度
+			anchor: 'left', // 提示框的定位点位于提示框的左边
+			autoHide: false, // 不自动因此那个
+			closable: true, // 可以关闭
+			contentEl: 'mytip', // 使用页面上的mytip元素作为提示内容
+			listeners: {
+				// 当该提示框渲染完成时，激发该事件处理函数
+				'render': function()
+				{
+					this.header.on('click', function(header, e)
+					{
+						// 阻止事件传播
+						e.stopEvent();
+						// 隐藏该提示框组件
+						Ext.getCmp('content-anchor-tip').hide();
+					});
+				}
+			}
+		},
+		{
+			target: 'bottomCallout',// 为bottomCallout元素起作用的提示框
+			html: '提示框的定位点位于该提示框的中间',
+			anchor: 'top', // 提示框的定位点位于提示框的上边
+			anchorOffset: 40 // 提示框的定位点的偏移距。
+		},
+		{
+			target: 'trackCallout',// 为trackCallout元素起作用的提示框
+			html: '提示框自动跟随鼠标移动',
+			anchor: 'right', // 提示框的定位点位于提示框的右边
+			trackMouse: true // 设置提示框自动跟随鼠标移动
+		}
+	];
+	// 遍历数组，针对每个提示框对象，创建Ext.tip.ToolTip对象
+	Ext.each(tooltips, function(config) {
+		Ext.create('Ext.tip.ToolTip', config);
+	}); 
+});
+</script>
+<h2>简单提示框</h2>
+<div id="basic" class="fkjava"></div>
+<h2>带定位点的提示框</h2>
+<div id="anchor" class="fkjava"></div>
+<div style="display:none;">
+<div id="mytip" style="overflow:hidden">
+	<ul>
+		<li>疯狂Ajax讲义</li>
+		<li>本书第2版本</li>
+	</ul>
+	<img src="ajax.png" alt="疯狂Ajax讲义" />
+</div>
+</div>
+</body>
+</html>

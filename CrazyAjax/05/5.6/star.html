@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 星际争霸 </title>
+	<style type="text/css">
+		body {
+			background: url("images/bg1.gif");
+		}
+	</style>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	// 差距变量，如果元素的某个坐标与目标点的某个坐标小于noDis，
+	// 就认为该方向上没有差距。
+	var noDis = 50;
+	// 计算距离的函数
+	function hypot(x1 , y1, x2 , y2)
+	{
+		return Math.sqrt(Math.pow(x1-x2 , 2) + Math.pow(y1-y2 ,2));
+	}
+	function changeCss(target , xPos , evt)
+	{
+		// 如果垂直方向上没有差距，水平移动
+		if(Math.abs(target.getY() - evt.getY()) <= noDis)
+		{
+			target.setStyle("background-position" , xPos + " 50%");
+		}
+		// 向上移动
+		else if (target.getY() > evt.getY() && target.getY() - evt.getY() > noDis)
+		{
+			target.setStyle("background-position" , xPos + " 25%");
+		}
+		// 向下移动
+		else
+		{
+			target.setStyle("background-position" , xPos + " 75%");						
+		}
+	}
+	Ext.onReady(function()
+	{
+		// 获取scv组件
+		var target = Ext.get("scv");
+		// 设置页面宽度、高度
+		Ext.getBody().setStyle("height" , "1200px")
+			.setStyle("width" , "2400px");
+		Ext.EventManager.on(Ext.getBody() , "click" , function(evt)
+		{
+			target.stopAnimation();
+			// 如果水平方向上没有差距，垂直移动
+			if(Math.abs(target.getX() - evt.getX()) <= noDis)
+			{
+				// 向上移动
+				if(target.getY() > evt.getY())
+				{
+					target.setStyle("background-position" , "0% 0%");
+				}
+				// 向下移动
+				else
+				{
+					target.setStyle("background-position" , "0% 100%");
+				}
+			}
+			// 向左移动
+			else if(target.getX() > evt.getX() && target.getX() - evt.getX() > noDis)
+			{
+				changeCss(target , "100%" , evt)
+			}
+			// 向右移动
+			else
+			{
+				changeCss(target , "0%" , evt)
+			}
+			// 需要移动的距离
+			var dis = hypot(target.getX(), target.getY()
+				, evt.getX(), evt.getY());
+			// 根据移动距离计算动画所需的时间
+			time = dis * 20;
+			target.animate({
+				duration : time,
+				to: {
+					x: evt.getX(),
+					y: evt.getY()
+				}
+			});
+		});
+	});
+</script>
+<div id="scv" style="width:48px;height:48px;
+background-image:url('images/scv_blue.gif');"></div>
+</body>
+</html>

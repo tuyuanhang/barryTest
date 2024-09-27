@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 使用Ext.Ajax方法 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="extjs/ext-all.js">
+</script>
+<h3>请输入你的信息：</h3>
+<form id="userForm">
+	用户名:<input type="text" name="user" id="user"/><br />
+	喜欢的图书:<select multiple="multiple" name="books" id="books">
+		<option value="java">疯狂Java讲义</option>
+		<option value="javaee">轻量级Java EE企业应用实战</option>
+		<option value="ajax">疯狂Ajax讲义</option>
+		<option value="xml">疯狂XML讲义</option>
+	</select><br />
+	<input id="load" type="button" value="发送异步请求"/>
+</form><hr />
+<div id="show"></div>
+<script type="text/javascript">
+	// 为id为load的组件的click事件绑定事件处理函数
+	Ext.fly("load").on("click" , function()
+	{
+		Ext.Ajax.request({
+			url: 'pro', // 向该URL发送Ajax请求
+			method: 'POST', // 指定发送POST请求
+			form: 'userForm', // 指定发送userForm作为请求参数
+//			params: { // 指定请求参数
+//				user: Ext.fly('user').getValue(),
+//				books: Ext.fly('books').getValue()
+//			},
+			// 指定服务器响应到来时的回调函数
+			success: function(response)
+			{
+				// 使用show元素显示服务器响应
+				Ext.DomHelper.overwrite('show'
+					, response.responseText);
+			}
+		});
+	});
+</script>
+</body>
+</html>

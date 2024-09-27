@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Ext.util.TaskRunner </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+// 定义一个需要执行的任务
+var task = 
+{
+	// 指定任务包装的函数
+	run: function()
+	{
+		for (var i = 0 ; i < 1000 ; i++ )
+		{
+			Ext.DomHelper.overwrite("time" 
+				, Ext.util.Format.date(new Date(), 'H时i分s秒' ));
+		}
+	},
+	// 指定每隔1秒执行一次
+	interval: 1000,
+	// 指定重复次数
+	repeat:2000
+};
+var runner = new Ext.util.TaskRunner();
+// 启动任务
+runner.start(task);
+// 上面两行代码与下面代码完全相同
+// Ext.TaskManager.start(task);
+</script>
+现在时间是：<span id="time"></span>
+</body>
+</html>

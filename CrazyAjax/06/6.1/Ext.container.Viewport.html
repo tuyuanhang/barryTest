@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.container.Viewport整体布局 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建一个TreeStore，TreeStore负责为Tree提供数据
+	var store = Ext.create('Ext.data.TreeStore', 
+	{
+		root: {
+			expanded: true,
+			children: [
+				{ text: "疯狂系列", expanded: true, children: 
+					[
+						{id: 1 , text: "疯狂Java讲义", leaf: true },
+						{id: 2 , text: "轻量级Java EE企业应用实战", leaf: true },
+						{id: 3 , text: "疯狂Ajax讲义", leaf: true },
+						{id: 4 , text: "疯狂Android讲义", leaf: true },
+						{id: 5 , text: "疯狂XML讲义", leaf: true },
+						{id: 6 , text: "经典Java EE企业应用实战", leaf: true }
+					]
+				},
+				{ text: "补充图书", expanded: true, children:
+					[
+						{id: 7 , text: "Struts 2.X权威指南", leaf: true },
+						{id: 8 , text: "Spring 3.X权威指南", leaf: true }
+					]
+				}
+			]
+		}
+	});
+	Ext.create('Ext.container.Viewport', 
+	{
+		layout: 'border',
+		items: [
+		// 上面区域的内容
+		{
+			region: 'north',
+			html: '<div style="width:900px"><a href="http://www.fkjava.org"><img alt="疯狂java" src="logo.gif"></a><a href="http://www.fkjava.org"><img alt="疯狂软件教育" src="banner.gif"></a></div>',
+			height: 90,
+			border: false,
+			margins: '0 0 5 0'
+		},
+		// 左边区域的内容
+		{
+			region: 'west',
+			xtype: 'treepanel', // 表明这是Ext.tree.Panel
+			title: '疯狂Java体系图书',
+			listeners:{
+				// 为itemclick事件添加监听器
+				itemclick : function(view , record, item)
+				{
+					// 如果是叶子节点
+					if(record.data.leaf)
+					{
+						// 获取页面中my_center组件，该组件是Ext.tab.Panel组件
+						var tabPanel = Ext.getCmp('my_center');
+						// 如果页面上没有该图书id对应的组件
+						if(!Ext.getCmp(record.data.id))
+						{
+							// 向Ext.tab.Panel组件中插入一个新的Tab页面
+							var tab = tabPanel.add(
+								{
+									// 设置新Tab页面的属性
+									id:record.data.id,
+									title: record.data.text,
+									html: record.data.text,
+									closable:true
+								}
+							);
+						}
+						// 激活正在查看的图书
+						tabPanel.setActiveTab(record.data.id);
+						// 向下边区域的Ext.panel.Panel组件中插入内容
+						Ext.getCmp('info').add({html:'正在操作《' 
+							+ record.data.text + '》图书！'});
+					}
+				}
+			},
+			width: 200,
+			store: store,
+			rootVisible: false
+
+		},
+		// 下边区域的内容，使用一个普通Ext.panel.Panel
+		// 没有指定xtype，默认是Ext.panel.Panel
+		{
+			id:'info',
+			region: 'south',
+			title: '操作信息',
+			collapsible: true,
+			split: true,
+			height: 100,
+			minHeight: 100
+		},
+		// 右边区域的内容，使用一个普通的Ext.panel.Panel
+		{
+			region: 'east',
+			title: '右边栏',
+			collapsible: true,
+			split: true,
+			width: 150
+		},
+		// 中间面板的内容：使用一个Ext.tab.Panel
+		{
+			region: 'center',
+			id:'my_center',
+			xtype: 'tabpanel',
+			activeTab: 0, 
+			items: {
+				title: '首页',
+				html: '学习Ext.container.Viewport的例子'
+			}
+		}]
+	});
+});
+</script>
+</body>
+</html>

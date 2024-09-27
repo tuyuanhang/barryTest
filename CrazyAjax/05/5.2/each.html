@@ -1,0 +1,24 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	// 定义一个数组
+	var books = ['疯狂Java讲义' , '轻量级Java EE企业应用实战'
+		, '疯狂Ajax讲义'];
+	// 遍历数组元素
+	Ext.each(books , function(book , index , arr)
+	{
+		document.writeln("第" + index + "本图书是："
+			+ book + "<br/>");
+	});
+	// 定义一个对象
+	var user = {
+		name:"fkjava",
+		password:"crazyit"
+	};
+	// 遍历user对象的属性
+	Ext.iterate(user , function(key , value , myself)
+	{
+		document.writeln(key + "-->" + value + "<br/>");
+	});
+</script>

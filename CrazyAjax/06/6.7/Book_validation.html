@@ -1,0 +1,53 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<!-- 导入Ext JS国际化所需的JavaScript库 -->
+<script type="text/javascript" src="../ext-lang-zh_CN.js">
+</script>
+<script type="text/javascript">
+Ext.onReady(function(){
+Ext.define('Book', {
+	extend: 'Ext.data.Model',
+	fields: [
+		{name: 'name',  type: 'string'},
+		{name: 'author',   type: 'string'},
+		{name: 'price', type: 'float'},
+		{name: 'publishDate', type: 'date', dateFormat:'y-m-d'},
+		{name: 'website', type: 'string'}
+	],
+	changeName: function(newName) 
+	{
+		this.set('name', newName);
+	},
+	validations: [
+		{type: 'presence', field: 'name'},// 必填
+		// 长度必须为2~20之间
+		{type: 'length', field: 'name', min: 2 , max: 20},
+		// author必须出现在列表中
+		{type: 'inclusion', field: 'author', list: ['李刚', 'yeeku']},
+		// website必须匹配www.网站.com的格式
+		{type: 'format', field: 'website'
+			, matcher: /www\.[\w0-9]{1,20}\.com/}
+	]
+});
+var book = Ext.create('Book',
+{
+	name: '疯狂Ajax讲义',
+	author: 'yeeku',
+	price: '69.0',
+	publishDate: '2012-09-12',
+	website: 'www.crazyit.org'
+});	
+// 对book对象执行校验
+var errors = book.validate();
+// 如果校验失败
+if(!errors.isValid())
+{
+	for (var i = 0; i < errors.length ; i++ )
+	{
+		alert(errors.getAt(i).field + " "
+			+ errors.getAt(i).message);
+	}
+}
+});
+</script>

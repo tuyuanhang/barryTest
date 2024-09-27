@@ -1,0 +1,21 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	// 创建了Crazyit、Crazyit.Element、
+	// Crazyit.Element.data三个命名空间
+	Ext.namespace('Crazyit.Element.data');
+	// 在Crazyit命名空间下定义sum()函数
+	Crazyit.sum = function(a , b)
+	{
+		return a + b;
+	}
+	// 在Crazyit.Element命名空间下定义create()函数
+	Crazyit.Element.create = function(tag)
+	{
+		return document.createElement(tag);
+	}
+	// 调用函数
+	alert(Crazyit.sum(2 , 4));
+	alert(Crazyit.Element.create("div"));
+</script>

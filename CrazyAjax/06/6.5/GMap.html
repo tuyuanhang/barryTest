@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> Google地图 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="a.css" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<!-- 导入Google Map服务的API -->
+<script type="text/javascript" 
+src="https://maps.googleapis.com/maps/api/js?v=3&sensor=true">
+</script>
+<!-- 导入其他用户为Google Map扩展的JavaScript库 -->
+<script type="text/javascript" src="GMapPanel.js">
+</script>	
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.create('Ext.panel.Panel', 
+	{
+		layout: 'fit',
+		title: 'GMap地图',
+		width: 800,
+		height: 600,
+		border: true,
+		renderTo: Ext.getBody(),
+		items: {
+			// 定义一个Ext.ux.GMapPanel
+			xtype: 'gmappanel',
+			// 指定地图中心
+			center: new google.maps.LatLng(23.125269, 113.395538),
+			// 在地图上添加标注
+			markers: [
+				// 第一个标注
+				{
+					lat: 23.125269,
+					lng: 113.395538,
+					title: '疯狂软件教育中心',
+					listeners: 
+					{
+						// 指定单击该标注时激发的事件处理函数
+						click: function(e)
+						{
+							Ext.Msg.alert('疯狂软件教育中心，欢迎前来学习、交流！');
+						}
+					}
+				},
+				// 第二个标注
+				{
+					lat: 23.123892,
+					lng: 113.396547,
+					title: '车陂地铁C出口！'
+				}
+			]
+		}
+	});
+});
+</script>
+</body>
+</html>

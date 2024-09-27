@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 滑动条 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="a.css" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.DomHelper.append(Ext.getBody() ,'<h3>最普通滑动条</h3>');
+	Ext.create('Ext.slider.Single', {
+		renderTo: Ext.getBody(),
+		width: 360,// 滑动条的宽度
+		minValue: 0, // 最小值
+		maxValue: 100, // 最大值
+		hideLabel: true, //隐藏Label
+		useTips: false // 指定不显示默认提示
+	});
+	Ext.DomHelper.append(Ext.getBody() ,'<h3>带Label的滑动条</h3>');
+	Ext.create('Ext.slider.Single', {
+		renderTo: Ext.getBody(),
+		width: 360,// 滑动条的宽度
+		minValue: 0, // 最小值
+		maxValue: 100, // 最大值
+		useTips: false, // 指定不显示默认提示
+		fieldLabel: '滑动条标签'
+	});
+	Ext.DomHelper.append(Ext.getBody() ,'<h3>绑定事件处理函数的滑动条</h3>');
+	Ext.DomHelper.append(Ext.getBody() 
+		,'<div id="a" style="width:40px;height:40px;background-color:red;"></div>');
+	Ext.create('Ext.slider.Single', {
+		renderTo: Ext.getBody(),
+		width: 360,// 滑动条的宽度
+		minValue: 0, // 最小值
+		maxValue: 100, // 最大值
+		useTips: false, /// 指定不显示默认提示
+		hideLabel: true, //隐藏Label
+		listeners:{
+			change:function(slider, newValue, thumb)
+			{
+				Ext.get('a').setOpacity(newValue / 100);
+			},
+			changecomplete: function(slider, newValue, thumb)
+			{
+				Ext.Msg.alert('拖动完成', 
+					'当前值是：' + newValue);
+			}
+		}
+	});
+	Ext.DomHelper.append(Ext.getBody() ,'<h3>increment=10的滑动条</h3>');
+	Ext.create('Ext.slider.Single', {
+		renderTo: Ext.getBody(),
+		width: 360,// 滑动条的宽度
+		value: 50, // 指定滑块的当前值
+		increment: 10, // 每次滑动滑块的改变的步长
+		minValue: 0, // 最小值
+		maxValue: 100, // 最大值
+		hideLabel: true, //隐藏Label
+		useTips: false // 指定不显示默认提示
+	});
+	Ext.DomHelper.append(Ext.getBody() ,'<h3>自定义minValue和maxValue的滑动条</h3>');
+	Ext.create('Ext.slider.Single', {
+		renderTo: Ext.getBody(),
+		width: 360,// 滑动条的宽度
+		value: 50, // 指定滑块的当前值
+		increment: 2, // 每次滑动滑块的改变的步长
+		minValue: 52, // 最小值
+		maxValue: 84, // 最大值
+		hideLabel: true, //隐藏Label
+		useTips: false // 指定不显示默认提示
+	});
+	Ext.DomHelper.append(Ext.getBody() ,'<h3>vertical为true的垂直滑动条</h3>');
+	Ext.create('Ext.slider.Single', {
+		renderTo: Ext.getBody(),
+		height: 120,// 滑动条的高度
+		vertical: true, // 垂直滑动条
+		minValue: 0, // 最小值
+		maxValue: 100, // 最大值
+		hideLabel: true, //隐藏Label
+		useTips: false // 指定不显示默认提示
+	});
+	Ext.DomHelper.append(Ext.getBody() ,'<h3>使用默认提示(useTips为true)的滑动条</h3>');
+	Ext.create('Ext.slider.Single', {
+		renderTo: Ext.getBody(),
+		width: 360,// 滑动条的宽度
+		value: 66, // 指定滑块的当前值
+		minValue: 0, // 最小值
+		maxValue: 100, // 最大值
+		hideLabel: false, //隐藏Label
+		useTips: true // 指定显示默认提示
+	});
+	Ext.DomHelper.append(Ext.getBody() ,'<h3>使用自定义提示信息的滑动条</h3>');
+	Ext.create('Ext.slider.Single', {
+		renderTo: Ext.getBody(),
+		width: 360,// 滑动条的高度
+		minValue: 0, // 最小值
+		maxValue: 100, // 最大值
+		hideLabel: true, //隐藏Label
+		tipText: function(thumb) // 指定移动时的提示信息
+		{
+			return Ext.String.format('<b>当前值为：{0}', thumb.value);
+		}
+	});
+});
+</script>
+</body>
+</html>

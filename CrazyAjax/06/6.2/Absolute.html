@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 自适应布局 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	Ext.create('Ext.window.Window', 
+	{
+		title: '绝对布局',
+		width: 360,
+		height: 140,
+		layout: 'absolute',// 设置绝对布局
+		defaultType: 'textfield',// 设置所有子组件的默认类型
+		items: [
+			// 添加子组件，所有子组件都通过x、y设置位置
+			{
+				x: 10,
+				y: 10,
+				xtype:'label',
+				text: '用户名'
+			},
+			{
+				x: 80,
+				y: 10,
+				name: 'name',
+				anchor:'90%'
+			},
+			{
+				x: 10,
+				y: 40,
+				xtype:'label',
+				text: '密码'
+			},
+			{
+				x: 80,
+				y: 40,
+				name: 'password',
+				anchor: '90%'
+			},
+		],
+		bbar: [
+			{xtype: 'tbfill'},
+			{text:'登录'},
+			{text:'取消'},
+			{xtype: 'tbfill'}
+		]
+	}).show();
+});
+</script>
+</body>
+</html>

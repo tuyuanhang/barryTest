@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Ext.DomHelper </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		// 创建一个Ext.Template对象，包含命名占位符
+		var tpl = Ext.DomHelper.createTemplate(
+		{
+			// 指定元素的标签名
+			tag: "dl",
+			html: "<dt>{name}</dt><dd>{price}</dd><dd>{author}</dd>",
+			style: "background-color:#afa"
+		});
+		var bookArr = [
+			{name: "疯狂Java讲义" , 
+			price: "109" ,
+			author: "yeeku"},
+			{name: "疯狂Android讲义" ,
+			price: "89" ,
+			author: "yeeku"},
+			{name: "疯狂Ajax讲义" ,
+			price: "69" , 
+			author: "yeeku"}
+		];
+		// 遍历数组
+		for(var i = 0 ; i < bookArr.length; i++)
+		{
+			// bookArr[i]是对象，
+			// 各属性值分别填充对应的命名占位符
+			tpl.append("a" , bookArr[i]);
+		}
+	});
+</script>
+<div id="a" style="height:240px;border:1px solid black;">fkjava</div>
+</body>
+</html>

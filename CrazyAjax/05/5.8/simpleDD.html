@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+	<title> 简单拖放元素 </title>
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 将target元素创建成可拖放的元素。
+	// 并将该可拖放元素加入到'a'组中
+//	new Ext.dd.DD('target', 'a');      // ①
+	new Ext.dd.DDProxy('target', 'a');
+});
+</script>
+<div id="target" style="background:#afa;width:100px;height:50px">
+	能拖放的元素</div>
+</body>
+</html>

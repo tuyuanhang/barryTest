@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.field.Spinner </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.define('Ext.ux.ArraySpinner', {
+		extend: 'Ext.form.field.Spinner',
+		alias: 'widget.arrayspinner',
+		// 当用户单击“向上”箭头时触发该事件处理函数
+		onSpinUp: function() 
+		{
+			var me = this;
+			if (!me.readOnly) 
+			{
+				var val = Ext.Array.indexOf(me.array, me.getValue());
+				val = val >= 0 ? val : 0;
+				// 如果val索引还不是数组元素的最小索引，索引-1
+				if(val > 0)
+				{
+					val--;
+				}
+				// 将数组元素的值设为该控件的值。
+				me.setValue(me.array[val]);
+			}
+		},
+		// 当用户单击“向下”箭头时触发该事件处理函数
+		onSpinDown: function() 
+		{
+			var me = this;
+			if (!me.readOnly) 
+			{
+				// 获取当前值在me.array数组中的索引
+				var val = Ext.Array.indexOf(me.array, me.getValue());
+				// 如果val索引还不是数组元素的最大索引，索引+1
+				if(val < me.array.length - 1)
+				{
+					val++;
+				}
+				// 将数组元素的值设为该控件的值。
+				me.setValue(me.array[val]);
+			}
+		},
+	});
+	Ext.create('Ext.form.FormPanel', 
+	{
+		title: '使用Ext.form.field.Spinner',
+		bodyPadding: 5,
+		width: 350,
+		renderTo: Ext.getBody(),
+		items:[
+		{
+			xtype: 'arrayspinner',
+			fieldLabel: '选择图书',
+			// 为该控件指定一个数组
+			array: [
+				'疯狂Java讲义',
+				'轻量级Java EE企业应用实战',
+				'疯狂Ajax讲义',
+				'疯狂Android讲义',
+				'疯狂XML讲义']
+		}]
+	});
+});
+</script>
+</body>
+</html>

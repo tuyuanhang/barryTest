@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 普通按钮 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	var sizes = ['small', 'medium', 'large' ];
+	Ext.DomHelper.append(Ext.getBody() , "<h3>简单按钮</h3>")
+	Ext.Array.each(sizes, function(size , index)
+	{
+		Ext.create('Ext.button.Button',
+		{
+			text: '简单按钮',
+			scale: size,
+			// 为该按钮的单击事件绑定事件处理函数
+			handler : function(evt)
+			{
+				if(!this.count)
+				{
+					alert("您是第一次单击该按钮");
+					this.count = 1;
+				}
+				else
+				{
+					alert("您是第" + ++this.count + "次单击该按钮！");
+				}
+				
+			},
+			renderTo: Ext.getBody()
+		});
+	});
+	Ext.DomHelper.append(Ext.getBody() , "<h3>图标按钮</h3>")
+	Ext.Array.each(sizes, function(size , index)
+	{
+		Ext.create('Ext.button.Button',
+		{
+			icon: 'icon.png',
+			scale: size,
+			renderTo: Ext.getBody()
+		});
+	});
+	Ext.DomHelper.append(Ext.getBody() , "<h3>文字、图标按钮</h3>")
+	Ext.Array.each(sizes, function(size , index)
+	{
+		Ext.create('Ext.button.Button',
+		{
+			text: '按钮',
+			icon: 'icon.png',
+			scale: size,
+			renderTo: Ext.getBody()
+		});
+	});
+	Ext.DomHelper.append(Ext.getBody() , "<h3>图标靠右按钮</h3>")
+	Ext.Array.each(sizes, function(size , index)
+	{
+		Ext.create('Ext.button.Button',
+		{
+			text: '按钮',
+			icon: 'icon.png',
+			iconAlign: 'right',
+			scale: size,
+			renderTo: Ext.getBody()
+		});
+	});
+	Ext.DomHelper.append(Ext.getBody() , "<h3>带图标的开关按钮</h3>")
+	Ext.Array.each(sizes, function(size , index)
+	{
+		Ext.create('Ext.button.Button',
+		{
+			text: '按钮',
+			icon: 'icon.png',
+			scale: size,
+			enableToggle: true,
+			renderTo: Ext.getBody()
+		});
+	});
+});
+</script>
+</body>
+</html>

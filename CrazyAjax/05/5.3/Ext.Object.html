@@ -1,0 +1,25 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	var user = {
+		name: "孙悟空",
+		age: 500
+	}
+	// 调用each方法遍历user的每个key、value对
+	Ext.Object.each(user , function(key, value, myself)
+	{
+		document.writeln(key + "-->" + value + "<br/>");
+	});
+	// 将对象转换为查询字符串
+	document.writeln("user转换的查询字符串为：" 
+		+ Ext.Object.toQueryString(user) + "<br/>");
+	// 将查询字符串转换为对象
+	var dog = Ext.Object.fromQueryString("name=Garfield&color=yellow");
+	// 获取指定对象的所有key
+	document.writeln("dog的所有key为：" 
+		+ Ext.Object.getKeys(dog) + "<br/>");
+	// 获取指定对象的所有value
+	document.writeln("dog的所有value为：" 
+		+ Ext.Object.getValues(dog) + "<br/>");
+</script>

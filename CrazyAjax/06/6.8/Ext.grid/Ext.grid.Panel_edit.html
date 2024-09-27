@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 允许异步编辑远程数据 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.define('Book', {
+		extend: 'Ext.data.Model',
+		fields: [
+			{name: 'id' , type: 'int'},
+			{name: 'name', type: 'string'},
+			{name: 'author', type: 'string'},
+			{name: 'price', type: 'float'},
+		]
+	});
+	// 创建一个Ext.data.Store对象
+	var bookStore = Ext.create('Ext.data.Store', 
+	{
+		// 指定使用Book Model管理记录
+		model: 'Book',
+		// 使用proxy指定加载远程数据
+		proxy: 
+		{
+			type: 'ajax',
+			url: 'getAllBooks',// 向该URL发送Ajax请求
+			reader: { // 使用Ext.data.reader.Json读取服务器数据
+				type: 'json',
+				root: 'data' // 直接读取服务器响应的data数据
+			},
+		},
+		autoLoad:true// 自动加载服务器数据
+	});
+	var grid = Ext.create('Ext.grid.Panel', {
+		title: '查看服务器端图书',
+		width: 550, // 指定表单宽度
+		renderTo: Ext.getBody(),
+		// 定义该表格包含的所有数据列
+		columns: [
+			{ text: '图书ID', dataIndex: 'id' , flex: 1 }, // 第1个数据列
+			 // 第2个数据列
+			{ text: '书名', dataIndex: 'name' , flex: 1,
+				editor: {xtype: 'textfield', allowPattern: false}},
+			 // 第3个数据列
+			{ text: '作者', dataIndex: 'author', flex: 1,
+				editor: {xtype: 'textfield', allowPattern: false}},
+			// 第4个数据列
+			{ text: '价格', dataIndex: 'price' , flex: 1,
+				editor: {xtype: 'numberfield', allowPattern: false}},
+		],
+		selType: 'rowmodel', // 指定选择模式：行选择模式
+		plugins: 
+		[
+			// 增加表格行编辑插件
+			{
+				ptype: 'rowediting',
+				clicksToEdit: 1
+			}
+		],
+		store: bookStore
+	});
+	// 当表格编辑完成后，触发该事件处理函数
+	grid.on('edit', function(editor, e)
+	{
+		Ext.Ajax.request({
+			url: 'updateBook', // 向此处发送Ajax请求
+			method: 'POST',
+			params: { // 指定请求参数
+				id: e.newValues.id,
+				name: e.newValues.name,
+				author: e.newValues.author,
+				price: e.newValues.price,
+			}, // 指定服务器响应完成的回调函数
+			success: function(response){
+				alert(Ext.JSON.decode(response.responseText).tip);
+				e.record.commit();
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>

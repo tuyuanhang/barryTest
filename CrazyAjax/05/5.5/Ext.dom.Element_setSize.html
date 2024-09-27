@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 对元素使用动画 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		var target = Ext.get("a");
+		// 为zoomIn按钮的click事件绑定事件处理函数。
+		Ext.fly("zoomIn").on("click" , function()
+		{
+			target.setSize(400 , 400 , {
+				duration: 2000,
+				easing: "backIn"
+			});
+		});
+		// 为zoomOut按钮的click事件绑定事件处理函数。
+		Ext.fly("zoomOut").on("click" , function()
+		{
+			target.setSize(40 , 40 , {
+				duration: 2000,
+				easing: "easeInOut"
+			});
+		})
+	});
+</script>
+<div id="a" style="background-color:#afa">fkjava</div>
+<button id="zoomIn">放大</button>
+<button id="zoomOut">缩小</button>
+</body>
+</html>

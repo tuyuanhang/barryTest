@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> util.js测试 </title>
+</head>
+<body>
+<script src="../util.js" type="text/javascript"></script>
+<script type="text/javascript">
+function set()
+{
+	// 定义了一个JSON格式的对象，该对象的每个属性名
+	// 对应页面中的一个HTML元素的ID属性值。
+	var obj = {
+		txt : '测试文本',
+		pass: '12345678',
+		area: 'Ajax是一个有趣的技术\n我们应该学习它',
+		select: 'two'
+	};
+	// 调用该方法后，页面中对应的HTML元素值将被设置为上面JSON对象的属性值
+	dwr.util.setValues(obj);
+}
+function get()
+{
+	// 定义了一个JavaScript对象。
+	// 该对象的属性名对应于页面中的HTML元素的id属性
+	var obj = {
+		txt : null,
+		pass: null,
+		area: null,
+		select: null};
+	// 调用getValues方法后，obj的属性值将被设置为页面中对应HTML元素的值
+	dwr.util.getValues(obj);
+	var result = "";
+	// 通过遍历obj对象的属性，输出obj对象的所有属性值。
+	for (var name in obj)
+	{
+		result += obj[name] + "\n";
+	}
+	alert(result);
+}
+</script>
+<input id="txt" type="text" /><br />
+<input id="pass" type="password" /><br />
+<textarea id="area" rows="2" cols="50"></textarea><br />
+<select id="select">
+	<option value="one">一</option>
+	<option value="two">二</option>
+	<option value="three">三</option>
+</select>
+<input type="button" value="设置值" onclick="set();"/>
+<input type="button" value="获取值" onclick="get();"/>
+</body>
+</html>

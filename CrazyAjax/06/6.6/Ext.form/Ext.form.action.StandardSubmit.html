@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.action.StandardSubmit提交表单 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建表单容器
+	Ext.create('Ext.form.Panel', {
+		title: '简单表单',
+		bodyPadding: 5,
+		width: 350, // 指定表单宽度
+		standardSubmit: true, // 指定使用传统方式提交请求
+		url: 'loginPro',
+		method: 'POST', // 指定以POST方式提交请求
+		// 默认使用anchor布局方式
+		layout: 'anchor',
+		// 设置表单控件默认占满整个容器
+		defaults: {
+			anchor: '100%'
+		},
+		// 设置表单组件的默认类型
+		defaultType: 'textfield',
+		// 为所有表单控件设置默认属性
+		fieldDefaults: {
+			labelAlign: 'left',
+			labelWidth: 100
+		},
+		items: [
+			{
+				fieldLabel: '用户名', // 表单控件的Label
+				name: 'name', // 表单控件的名称
+				allowBlank: false // 输入校验：不允许为空
+			},
+			{
+				fieldLabel: '密码', // 表单控件的Label
+				name: 'passwd', // 表单控件的名称
+				allowBlank: false // 输入校验：不允许为空
+			}
+		],
+		// 为表单设置按钮
+		buttons: [
+			{
+				// 重设按钮
+				text: '重设',
+				// 单击该按钮时重设表单
+				handler: function() 
+				{
+					this.up('form').getForm().reset();
+				}
+			},
+			{
+				// 提交按钮
+				text: '提交',
+				formBind: true, // 只有当整个表单输入校验通过时，该按钮才可用
+				disabled: true, // 设置该按钮默认不可用
+				// 单击该按钮的事件处理函数
+				handler: function()
+				{
+					// 获取表单，实际返回的是Ext.form.Basic对象
+					var form = this.up('form').getForm();
+					// 如果表单输入校验通过
+					if (form.isValid()) 
+					{
+						// 以传统方式提交表单
+						form.submit();
+					}
+				}
+			}
+		],
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

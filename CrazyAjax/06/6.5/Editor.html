@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 编辑器 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="a.css" type="text/css" />
+	<style type="text/css">
+		div {
+			width: 300px;
+			height: 24px;
+			border: 1px solid black;
+		}
+	</style>
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	// 创建文本编辑器
+	var textEditor = new Ext.Editor({
+		updateEl: true,
+		// 指定使用文本编辑器
+		field: {
+			xtype: 'textfield'
+		}
+	});
+	// 创建时间编辑器
+	var timeEditor = new Ext.Editor({
+		updateEl: true,
+		// 指定使用时间编辑器
+		field: {
+			xtype: 'timefield'
+		}
+	});
+	// 创建数值编辑器
+	var numberEditor = new Ext.Editor({
+		updateEl: true,
+		// 指定使用数值编辑器
+		field: {
+			xtype: 'numberfield'
+		}
+	});
+	var a = Ext.get('a');
+	// 指定当用户双击该组件时，开始编辑该组件
+	a.on("dblclick" , function(e)
+	{
+		// 使用文本编辑器进行编辑
+		textEditor.startEdit(a);
+	});
+	var b = Ext.get('b');
+	// 指定当用户双击该组件时，开始编辑该组件
+	b.on("dblclick" , function(e)
+	{
+		// 使用日期编辑器进行编辑
+		timeEditor.startEdit(b);
+	});
+	var c = Ext.get('c');
+	// 指定当用户双击该组件时，开始编辑该组件
+	c.on("dblclick" , function(e)
+	{
+		// 使用数值编辑器进行编辑
+		numberEditor.startEdit(c);
+	});
+});
+</script>
+<div id='a'></div>
+<div id='b'></div>
+<div id='c'></div>
+</body>
+</html>

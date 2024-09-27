@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 具体事件相关的方法 </title>
+</head>
+<body>
+<input id="test1" type="button" value="单击我"/><br />
+<div id="test2">
+	鼠标悬停、移除将触发指定函数
+</div>
+<script type="text/javascript" src="../jquery-1.8.0.js">
+</script>
+<script type="text/javascript">
+$("#test1").click(function(event)
+{
+	alert("id为test1的按钮被单击" + event)
+})
+.click();
+// 使用hover为id为test2的元素绑定2个事件处理函数
+// 当鼠标移入该元素时触发第一个函数，移出该元素时触发第二个函数
+$("#test2").css("border" , "1px solid black")
+	.css("background-color" , "#cccccc")
+	.width(200)
+	.height(80)
+	.hover(function(event)
+	{
+		alert("鼠标移入该元素之内！");
+	},
+	function()
+	{
+		alert("鼠标移出该元素！");
+	}
+);
+</script>
+</body>
+</html>

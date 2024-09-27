@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>使用jQuery表单对象属性过滤选择器</title>
+	<script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+	<style type="text/css">
+		body{font-size:12px;text-align:center}
+		div{display:none}
+		select{height:65px}
+		.clsIpt{width:100px;padding:3px}
+		.GetFocus{border:solid 1px #666;background-color:#eee}
+	</style>
+	<script type="text/javascript">
+		$(function(){
+			$("#divA").show(3000);
+			$("#form1 input:enabled").addClass("GetFocus");
+		})
+		$(function(){
+			$("#divB").show(3000);
+			$("#form1 input:checked").addClass("GetFocus");
+		})
+		$(function(){
+			$("#divC").show(3000);
+			$("#Span2").html("选中项是:" +
+			    $("select option:selected").text());
+		})
+	</script>
+</head>
+<body>
+	<form id="form1" style="width:241px">
+		<div id="divA">
+			<input type="text" value="可用文本框" class="clsIpt" />
+			<input type="text" disabled="disabled" value="不可用文本框" class="clsIpt" />
+		</div>
+		<div id="divB">
+			<input type="checkbox" checked="checked" value="1" />选中
+			<input type="checkbox" value="0" />未选中
+		</div>
+		<div id="divC">
+			<select multiple="multiple">
+				<option value="0">Item 0</option>
+				<option value="1" selected="selected">Item 1</option>
+				<option value="2">Item 2</option>
+				<option value="3" selected="selected">Item 3</option>
+			</select>
+			<span id="Span2"></span>
+		</div>
+	</form>
+</body>
+</html>

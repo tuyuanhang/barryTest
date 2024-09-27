@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.field.TextArea </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.create('Ext.form.FormPanel', {
+		title: '使用Ext.form.field.TextArea',
+		width: 400, // 设置该Panel的宽度
+		bodyPadding: 5,
+		renderTo: Ext.getBody(),
+		items:[{
+			xtype: 'textareafield',			
+			name: 'message', // 设置该组件对应的请求参数的名
+			fieldLabel: '留言内容',
+			anchor: '100%', // 设置该控件占父容器宽度的100％
+			grow: true, // 设置该控件的高度会自动增加
+			growMin: 60, // 设置该控件的最小高度是60px
+			growMax: 300 // 设置该控件自动增高时最大高度是300px。
+		}]
+	});
+});
+</script>
+</body>
+</html>

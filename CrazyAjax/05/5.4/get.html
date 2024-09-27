@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 获取HTML页面元素 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		// 根据ID来获取Ext.dom.Element对象
+//			Ext.get("target")
+		Ext.fly("target")
+			// 设置宽度、高度
+			.setWidth(200)
+			.setHeight(80)
+			// 设置样式
+			.setStyle("border" , "2px solid black");
+		// 获取页面的body元素
+		Ext.getBody()
+			// 设置背景色
+			.setStyle("background-color" , "#afa");
+	});
+</script>
+<div id="target"></div>
+</body>
+</html>

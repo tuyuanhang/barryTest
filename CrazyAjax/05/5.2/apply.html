@@ -1,0 +1,20 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	var user = {
+		name : "孙悟空",
+		age : 500,
+		gender: "男"
+	}
+	var cat = {
+		name : "Garfield",
+		color : "橙色"
+	}
+	// 指定将cat对象的属性复制到user对象中。
+	Ext.apply(cat , user);
+	for(var propName in cat)
+	{
+		document.writeln(propName + "-->" + cat[propName] + "<br/>")	;
+	}
+</script>

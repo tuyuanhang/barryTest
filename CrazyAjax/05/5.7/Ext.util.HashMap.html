@@ -1,0 +1,25 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	var map = new Ext.util.HashMap();
+	// 向Map中添加4个key-value对
+	map.add("Java" , 89 );
+	map.add("Spring" , 92);
+	map.add("Ajax" , 86 );
+	map.add("Hibernate" , 87);
+	// 判断是否包含某个key
+	document.writeln(map.containsKey("Java") +"<br/>");
+	// 判断是否包含某个value
+	document.writeln(map.contains(92) +"<br/>");
+	// 判断该map中包含的key-value对
+	document.writeln(map.getCount() +"<br/>");
+	// 删除指定key
+	map.remove("Spring");
+	document.writeln("Ajax的成绩是：" + map.get("Ajax") + "<br/>");
+	// 遍历key-value对
+	map.each(function(key, value, length)
+	{
+		document.writeln(key + "-->" + value + "<br/>");
+	});
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 使用Observable实现自定义事件 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+var theme = null;
+Ext.onReady(function()
+{
+	// 自定义FkjavaTheme类
+	Ext.define('FkjavaTheme', 
+	{
+		extend: 'Ext.util.Observable',
+		constructor: function(config)
+		{
+			this.name = config.name;
+			// 增加两个自定义事件
+			this.addEvents({
+				"topic" : true,
+			});
+			// 添加监听器
+			this.listeners = config.listeners;
+			// 回调父类的方法
+			this.callParent(arguments)
+		}
+	});
+	// 定义消息主题
+	theme = new FkjavaTheme({
+		name: "消息主题"
+	});
+	// 为消息主题绑定3个事件处理函数
+	theme.on("topic" , function(evt)
+	{
+		alert("第一个观察者函数收到事件：" + evt.name);
+	});
+	theme.on("topic" , function(evt)
+	{
+		alert("第二个观察者函数收到事件：" + evt.name);
+	});
+	theme.on("topic" , function(evt)
+	{
+		alert("第三个观察者函数收到事件：" + evt.name);
+	});
+});
+</script>
+<button onclick='theme.fireEvent("topic" , {name: "主题事件"});'>
+	发布事件</button>
+</body>
+</html>

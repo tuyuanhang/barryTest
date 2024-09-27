@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 简单的树 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建Ext.data.TreeStore
+	window.treeStore = Ext.create('Ext.data.TreeStore', {
+		// 定义根节点
+		root: {
+			// 根节点的文本
+			text: '中国',
+			expanded: true,
+			// 指定根节点包含的所有子节点
+			children: [
+				// 通过icon选项指定自定义图标
+				{text: "广东", expanded: true , icon: 'icon.gif',
+					children: [
+					{text: "广州", children: [
+						{text: '天河' , leaf:false},
+						{text: '东山' , leaf:true},
+						{text: '越秀' , leaf:true}
+					]},
+					{text: "深圳", children: [
+						{text: '南山' , leaf:true},
+						{text: '福田' , leaf:true}
+					]}					
+				]},
+				{text: "广西", expanded: true, children: [
+					{text: "南宁", leaf: true},
+					{text: "桂林", leaf: true}
+				]},
+				{text: "湖南", leaf: true }
+			]
+		}
+	});
+	var tree = Ext.create('Ext.tree.Panel', {
+		title: '简单的树',
+		// 不使用Vista风格的箭头代表节点的展开/折叠状态
+		useArrows: false,
+		width: 300,
+		height: 250,
+		store: treeStore, // 指定该树所使用的TreeStore
+		rootVisible: true, // 指定根节点可见
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

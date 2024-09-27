@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 动态加载节点的树 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 定义一个Model类
+	Ext.define('Employee', {
+		extend: 'Ext.data.Model',
+		// 定义该Model类包含的所有列
+		fields: [
+			{name: 'id',  type: 'int'},
+			// 将原来的name属性映射成text列
+			{name: 'text',   type: 'string' , mapping:"name"},
+			{name: 'desc', type: 'string'},
+			{name: 'mgrId', type: 'int'}
+		]
+	});
+	// 创建Ext.data.TreeStore
+	treeStore = Ext.create('Ext.data.TreeStore', {
+		model: Employee,
+		proxy: {
+			type: 'ajax', // 指定使用Ajax请求
+			url: 'getChildrenNodes', // 向该URL发送请求
+			reader: {
+				type: 'json',
+				root: 'data' // 指定读取data属性
+			}
+		},
+	});
+	var tree = Ext.create('Ext.tree.Panel', {
+		title: '动态加载节点的树',
+		// 不使用Vista风格的箭头代表节点的展开/折叠状态
+		useArrows: false,
+		width: 300,
+		height: 350,
+		store: treeStore, // 指定该树所使用的TreeStore
+		rootVisible: false, // 指定根节点不可见
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

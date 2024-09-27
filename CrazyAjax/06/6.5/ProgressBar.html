@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 进度条 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建一个重复执行的模拟任务来更新pbar进度条的进度值
+	// pbar代表要更新进度的进度条，count代表要更新的次数。
+	var mockTask = function(pbar , btn , count , cb)
+	{
+		// 代表已经执行的次数
+		var complete = 0;
+		// 禁用该按钮
+		btn.dom.disabled = true;
+		var task = 
+		{
+			// 指定任务包装的函数
+			run: function()
+			{
+				// i代表任务完成的比例
+				var i = ++complete / count;
+				// 更新进度条的进度
+				pbar.updateProgress(i, "已经完成 " + Math.round(100*i) + '%...');
+				// complete>=count，代表任务已经完成
+				if(complete >= count)
+				{
+					// 启用btn按钮
+					btn.dom.disabled = false;
+					cb.call();
+				}
+			},
+			// 指定每隔1秒执行一次
+			interval: 200,
+			// 指定重复次数
+			repeat: count
+		};
+		// 启动重复执行的任务
+		Ext.TaskManager.start(task);
+	}
+	// 创建第一个进度条
+	var pb1 = Ext.create('Ext.ProgressBar', 
+	{
+		id: 'pb1',
+		text: '任务进行中...'
+	});
+	var btn1 = Ext.get('btn1');
+	btn1.on('click', function() 
+	{
+		// 更新p1text元素内的文本内容
+		Ext.fly('p1text').update('<b>任务执行中...</b>');
+		// 如果pbar1进度条没有渲染出来，将它渲染到p1元素中
+		if (!pb1.rendered)
+		{
+			pb1.render('p1');    //①
+		}
+		// 如果已经渲染过进度条
+		else
+		{
+			pb1.show();
+		}
+		// 使用mockTask来更新进度条的完成进度
+		mockTask(pb1, Ext.get('btn1') ,20 , function()
+		{
+			pb1.reset(true);
+			// 更新p1text组件的文本
+			Ext.fly('p1text').update('<b>任务完成！</b>').show();
+		});
+	});
+	// 创建第2个进度条
+	var pb2 = Ext.create('Ext.ProgressBar', {
+		id:'pb2',
+		text: '准备执行任务',
+		renderTo:'p2' // 直接现在p2元素中
+	});
+	// 获取btn2按钮
+	var btn2 = Ext.get('btn2');
+	btn2.on('click', function() 
+	{
+		// 使用mockTask来更新进度条的完成进度
+		mockTask(pb2, btn2 ,20 , function()
+		{
+			// 更新pb2进度条的状态文本
+			pb2.updateText('任务完成.');
+		});
+	});
+	// 创建第三个进度条
+	var pb3 = Ext.create('Ext.ProgressBar', {
+		id:'pb3',
+		width:300,//指定进度条的宽度
+		renderTo:'p3' // 直接显示在p3元素中
+	});
+	// 为pbar3进度条的update事件绑定事件处理函数
+	pb3.on('update', function(val) 
+	{
+		Ext.fly('p3text').dom.innerHTML += '.';
+	});
+	// 获取btn3按钮
+	var btn3 = Ext.get('btn3');
+	// 为btn3的单击事件绑定事件处理函数
+	btn3.on('click', function()
+	{
+		Ext.fly('p3text').update('任务执行中');
+		// 禁用btn3按钮
+		btn3.dom.disabled = true;
+		// 调用pb3的wait()指定该进度条等待多长时间自动消失
+		pb3.wait({        //②
+			interval: 200,
+			duration: 5000,
+			increment: 25,
+			// 任务完成完成时激发的函数
+			fn:function() 
+			{
+				// 启用btn3按钮
+				btn3.dom.disabled = false;
+				// 更新p3text文本框的内容
+				Ext.fly('p3text').update('<b>完成</b>');
+			}
+		});
+	});
+	// 创建第4个进度条
+	var pb4 = Ext.create('Ext.ProgressBar', {
+		id:'pb4',
+		text:'等待执行...', // 设置文本
+		textEl:'p4text', // 指定进度状态显示在p4text中    //③
+		renderTo:'p4' // 直接显示在p4元素中
+	});
+	// 获取btn4按钮
+	var btn4 = Ext.get('btn4');
+	btn4.on('click', function() 
+	{
+		// 使用mockTask来更新进度条的完成进度
+		mockTask(pb4, btn4 ,20 , function()
+		{
+			// 更新pb4进度条的状态文本
+			pb4.updateText('任务完成.');
+		});
+	});
+});
+</script>
+<button id="btn1">单击显示进度条</button><br>
+<div class="status" id="p1text">显示任务完成状态</div>
+<!-- 装第1个进度条的容器 -->
+<div id="p1" style="width:400px;"></div>
+<button id="btn2">启动任务</button>
+<!-- 装第2个进度条的容器 -->
+<div id="p2" style="width:400px;"></div>
+<button id="btn3">开始等待5秒</button><br>
+<!-- 装第3个进度条的容器 -->
+<div id="p3" style="width:400px;"></div>
+<div>
+<span class="status" id="p3text"></span>
+</div>
+<button id="btn4">在其他元素中显示状态的进度条</button>
+<div id="p4" style="width:400px;"></div>
+<div class="status">
+<b>进度条状态：</b> <span id="p4text"></span>
+</div>
+</body>
+</html>

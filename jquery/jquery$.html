@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<div id="lee"></div>
+	<div id="yeeku"></div>
+	<script type="text/javascript" src="./jquery-1.8.0.js">
+	</script>
+	<script type="text/javascript">
+		$("div").append("新增的内容");
+		$(document.getElementById('lee'))
+			.css("background-color", "#aaffaa")
+			.css("border", "1px solid black");
+		$("<input type='button' value='单击我' />")
+			.appendTo(document.body);
+		$("<input/>",
+			{
+				type:"button",
+				value:"有惊喜",
+				click:function(){alert("惊喜时刻");}
+			})
+			.appendTo(document.body);
+	</script>
+</body>
+</html>

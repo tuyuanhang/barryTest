@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 多状态按钮 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	Ext.create('Ext.panel.Panel',
+	{
+		title: '多状态按钮',
+		renderTo: Ext.getBody(),
+		height: 80,
+		items :[
+			// 定义带多状态的按钮
+			{
+				xtype: 'cycle',
+				showText: true, // 指定显示状态文本
+				prependText: '您的性别：', // 
+				icon: 'icon.png',
+				arrowAlign: 'bottom', // 指定箭头位于底端
+				scale: 'medium',
+				menu: { // 设置菜单，菜单的文本项代表按钮状态
+					items:[
+						{text:'男'},
+						{text:'女'},
+						{text:'保密'}
+					]
+				},
+				// 当按钮状态改变时，将会激发该事件处理函数
+				changeHandler: function(cycleBtn, activeItem)
+				{
+					Ext.Msg.alert('选择性别', activeItem.text);
+				}
+			}
+		]
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>使用jquery基本选择器</title>
+	<script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+	<style type="text/css">
+		body{font-size:12px;text-align:center}
+		.clsFrame{width:300px;height:100px}
+		.clsFrame div, span{display:none;float:left;
+			width:65px;height:65px;border:solid 1px #ccc;
+			margin:8px}
+		.clsOne{background-color:#eee}
+	</style>
+	<script type="text/javascript">
+		$(function(){
+			$("#divOne").css("display", "block");
+		})
+		$(function(){
+			$("div span").css("display", "block");
+		})
+		$(function(){
+			$(".clsFrame .clsOne").css("display", "block");
+		})
+		$(function(){
+			$("*").css("display", "block");
+		})
+		$(function(){
+			$("#divOne, span").css("display", "block");
+		})
+		$(function(){
+			$("#div>span").css("display","block");
+		})
+		$(function(){
+			$("#divMid").next().css("display","block");
+		})
+		$(function(){
+			$("#divMid").nextAll().css("display","block");
+		})
+	</script>
+</head>
+<body>
+	<div class="clsFrame">
+		<div id="divOne">ID</div>
+		<div class="clsOne">CLASS</div>
+		<span>SPAN</span>
+	</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 控制元素显示/隐藏的方法 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<div id="a" style="width:200px;height:80px;background-color:#aaa;"></div>
+<button onclick="Ext.fly('a').setVisibilityMode(
+Ext.dom.Element.VISIBILITY).show(true);">显示</button>
+<button onclick="Ext.fly('a').setVisibilityMode(
+Ext.dom.Element.VISIBILITY).hide(true);">隐藏</button>
+<button onclick="Ext.fly('a').setVisibilityMode(
+Ext.dom.Element.DISPLAY).setVisible(true ,true);">完全显示</button>
+<button onclick="Ext.fly('a').setVisibilityMode(
+Ext.dom.Element.DISPLAY).setVisible(false ,true);">完全隐藏</button>
+</body>
+</html>

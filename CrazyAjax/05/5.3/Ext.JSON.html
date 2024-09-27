@@ -1,0 +1,18 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	var user = {
+		name: "孙悟空",
+		age: 500
+	}
+	// 将对象转换成JSON字符串
+	document.writeln("user转换得到的JSON字符串为："
+		+ Ext.JSON.encode(user) + "<br/>");
+	var str = '[{"name":"Garfield","color":"blue"}'
+		+ ', {"name":"kitty" , "color":"white"}]';
+	// 将JSON字符串转换为数组
+	var arr = Ext.JSON.decode(str);
+	document.writeln("str转换得到的数组长度为："
+		+ arr.length);
+</script>

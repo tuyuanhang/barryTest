@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 按钮组 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	Ext.create('Ext.panel.Panel', {
+		title: '带按钮组的面板',
+		width: 300,
+		height: 200,
+		renderTo: Ext.getBody(),
+		bodyPadding: 10,
+		tbar: [
+			{
+				xtype: 'buttongroup',// 指定创建按钮组
+				columns: 3,// 按钮组分成3列
+				title: '剪贴板',
+				items: [
+					// 定义按钮组中的按钮
+					{
+						text: '普通按钮',
+						scale: 'large',
+						rowspan: 3, // 跨3行
+						icon: 'icon.png',
+						iconAlign: 'top',
+					},
+					{
+						xtype:'splitbutton',// 定义带分割线的按钮
+						text: '复制',
+						scale: 'large',
+						rowspan: 3, // 跨3行
+						icon: 'icon.png',
+						iconAlign: 'top',// 图标放上方
+						arrowAlign:'bottom', // 箭头在下方
+						// 定义菜单项
+						menu: [
+							{ text: '复制内容' },
+							{ text: '复制格式' ,icon: 'tools.gif'}
+						]
+					},
+					{
+						xtype:'splitbutton', // 定义带分割线的按钮
+						text: '剪切', 
+						// 定义菜单项
+						menu: [
+							{text: '剪切单词'},
+							{text: '剪切整行'}
+						]
+					},
+					{text: '复制'},
+					{text: '格式化'}
+				]
+			}
+		]
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 列布局 </title>
+	<style type="text/css">
+		.fkjava{
+			font-size: 14pt;
+			border: 3px dotted red;
+		}
+	</style>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	// 创建第一个Ext.panel.Panel面板
+	Ext.create('Ext.panel.Panel', 
+	{
+		title: '列布局 - 所有列使用百分比控制宽度',
+		width: 350,
+		height: 150,
+		layout:'column',// 使用列布局
+		items: [
+			{
+				title: '第一栏',
+				html:"导航栏",
+				columnWidth: 0.15
+			},
+			{
+				title: '页面的主栏',
+				html:"内容区",
+
+				columnWidth: 0.65
+			},
+			{
+				title: '右边栏',
+				html:"右边栏",
+				columnWidth: 0.20
+			}
+		],
+		renderTo: Ext.getBody()
+	});
+
+	Ext.create('Ext.panel.Panel', {
+		title: '列布局 - 混合方式控制各列宽度',
+		width: 350,
+		height: 150,
+		layout:'column',// 使用列布局
+		items: [
+			{
+				title: 'Column 1',
+				columnWidth: 0.3 // 设置占剩下宽度的30%
+			},
+			{
+				title: 'Column 2',
+				width: 80 // 设置该栏目实际宽度为80px
+			},
+			{
+				title: 'Column 3',
+				columnWidth: 0.7 // 设置占剩下宽度的70%
+			}
+		],
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

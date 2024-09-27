@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 拖放 </title>
+	<style type="text/css">
+		ul>li {
+			display: inline-block;
+			padding: 5px;
+		}
+		td {
+			height: 40px;
+		}
+	</style>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建、并执行创建拖动源的函数
+	(function()
+	{
+		// 获取需要创建“拖动源”的元素
+		source = Ext.get('source');
+		// 将source元素的子元素创建成拖放源
+		source.dragZone = Ext.create('Ext.dd.DragZone', source,  // ①
+		{
+			getDragData: function(e) {
+				var sourceEl = e.getTarget();
+				// 如果sourceEl元素存在
+				if (sourceEl)
+				{
+					// 复制sourceEl元素
+					var d = sourceEl.cloneNode(true);
+					// 生成一个新ID，作为d元素的ID
+					d.id = Ext.id();
+					return source.dragData = {
+						sourceEl: sourceEl,
+						repairXY: Ext.fly(sourceEl).getXY(),
+						ddel: d, // 指定拖动时的元素
+						myData: {name: sourceEl} // 指定拖动源携带的数据
+					};
+				}
+				// 如果sourceEl元素不存在，将dragData添加到source对象中
+				return source.dragData = {
+					repairXY: Ext.fly(sourceEl).getXY(),
+				}
+			},
+			getRepairXY: function() {
+				return v.dragData.repairXY;
+			}
+		});
+	})();
+	// 创建、并执行创建“放目标”的函数
+	(function(){
+		// 获取需要创建“放目标”的元素
+		target = Ext.fly('target');
+		target.dropZone = Ext.create('Ext.dd.DropZone', target,  // ②
+		{
+			// 通过事件获取可以作为放的目标
+			getTargetFromEvent: function(e) {
+				// 指定只有td元素才能作为“放目标”
+				return e.getTarget("td");
+			},
+			// 将用户“放下”拖动元素时激发该函数
+			onNodeDrop : function(target, dd, e, data){
+				// 复制data.myData对应的节点
+				var newEl = data.myData.name.cloneNode(true);
+				// 将复制出来的newEl节点添加到target节点后
+				Ext.get(newEl).appendTo(Ext.get(target));
+				return true;
+			}
+		});
+	})();
+});
+</script>
+<ul id="source">
+	<li><img src='images/iphone.png'></li>
+	<li><img src='images/nokia.png'></li>
+	<li><img src='images/moto.png'></li>
+	<li><img src='images/htc.png'></li>
+</ul>
+<table id="target" border="1" width="600">
+	<tr>
+		<td></td><td></td>
+	</tr>
+	<tr>
+		<td></td><td></td>
+	</tr>
+</table>
+</body>
+</html>

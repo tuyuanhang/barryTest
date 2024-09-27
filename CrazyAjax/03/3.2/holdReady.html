@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> holdReady()函数 </title>
+</head>
+<body>
+<script type="text/javascript" src="../jquery-1.8.0.js">
+</script>
+<script type="text/javascript">
+// 延迟ready()事件处理函数
+$.holdReady(true);
+// 指定页面装载完成后自动回调该函数
+$(function()
+{
+	alert("页面装载完成！");
+});
+// 设置2秒后取消延迟ready()事件处理函数
+window.setTimeout("$.holdReady(false);", 2000);
+</script>
+</body>
+</html>

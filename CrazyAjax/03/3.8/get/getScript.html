@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 使用jQuery的getScript方法 </title>
+</head>
+<body>
+<ul style="display:none">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+<input id="get" type="button" value="getScript"/>
+<div id="show"></div>
+<script src="jquery-1.8.0.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+	// 为id为get的按钮绑定事件处理函数
+	$("#get").click(function()
+	{
+		$.getScript("script.jsp");
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 增加大小调整的功能 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	// 创建窗口
+	Ext.create('Ext.window.Window',
+	{
+		// 没有指定布局方式，默认是垂直布局
+		title: '垂直布局与水平布局',
+		width: 600, // 指定宽度
+		height: 220, // 指定高度
+		// 指定该容器包含的组件
+		items: [
+			{
+				id : "author",
+				fieldLabel: '作者',
+				xtype: 'textfield',
+				padding:10
+			},
+			{
+				fieldLabel: '输入出版社',
+				xtype: 'textfield'
+			},
+			// 第2个组件，没有指定xtype，默认是panel，表明嵌套了一个Panel
+			{ 
+				title: '输入出版时间',
+				layout: 'hbox',
+				bodyPadding: 5,
+				height: 80, // 指定高度
+				items: [
+					{
+						fieldLabel: '起始时间',
+						xtype: 'datefield'
+					},
+					{
+						fieldLabel: '结束时间',
+						xtype: 'datefield'
+					}
+				], 
+				flex: 2,
+				resizable: {
+					handles: 'n s ns',
+					minWidth: 200,
+					minHeight: 80,
+					maxWidth: 500,
+					maxHeight: 400,
+					transparent:false,
+					pinned: true
+				}
+			}
+		],
+		bbar: [
+			{xtype: 'tbfill'},
+			{xtype: 'button' , text:'搜索'},
+			{xtype: 'button' , text:'取消'},
+			{xtype: 'tbfill'}
+		]
+	}).show();
+	Ext.create('Ext.resizer.Resizer', {
+		el: 'author',
+		handles: 'all',
+		minWidth: 200,
+		minHeight: 60,
+		maxWidth: 500,
+		maxHeight: 400,
+		pinned: true
+	});
+});
+</script>
+</body>
+</html>

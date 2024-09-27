@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Ext.selectXxx()方法 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		alert(Ext.dom.Query.selectNode("div").innerHTML);
+		alert(Ext.dom.Query.selectValue("#a"));
+		alert(Ext.dom.Query.selectNumber("#b"));
+		Ext.select(".a")
+			.setStyle("border" , "2px solid black");
+ 	});
+</script>
+<div id="a">hello world</div>
+<div id="b" class="a">20</div>
+</body>
+</html>

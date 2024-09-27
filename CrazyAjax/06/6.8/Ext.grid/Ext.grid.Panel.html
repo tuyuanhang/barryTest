@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用本地数据创建表格 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.define('Book', {
+		extend: 'Ext.data.Model',
+		fields: [
+			{name: 'name', type: 'string'},
+			{name: 'author', type: 'string'},
+			{name: 'price', type: 'float'},
+			{name: 'publishDate', type: 'date'}
+		]
+	});
+	// 创建一个Ext.data.Store对象
+	var bookStore = Ext.create('Ext.data.Store', 
+	{
+		// 指定使用Book Model管理记录
+		model: 'Book',
+		// 直接使用data指定数据
+		data : [
+			{"id": 1, name: "疯狂Java讲义", 
+				author:'李刚' , price: 109, publishDate:'2012-01-01'},
+			{"id": 2, name:"轻量级Java EE企业应用实战",
+				author:'李刚' , price: 99, publishDate:'2011-09-02'},
+			{"id": 3, name: "疯狂Ajax讲义",
+				author:'李刚' , price: 69, publishDate:'2012-09-08'},
+		]
+	});
+	Ext.create('Ext.grid.Panel', {
+		title: '查看图书',
+		width: 550, // 指定表单宽度
+		renderTo: Ext.getBody(),
+		// 定义该表格包含的所有数据列
+		columns: [
+			{ text: '书名', dataIndex: 'name' , flex: 1 }, // 第1个数据列
+			{ text: '作者', dataIndex: 'author', flex: 1 }, // 第2个数据列
+			{ text: '价格', dataIndex: 'price' , flex: 1 }, // 第3个数据列
+			// 第4个数据列
+			{ text: '出版时间', dataIndex: 'publishDate',
+				xtype:'datecolumn' , format:'Y年m月d日' , flex: 1},
+		],
+		store: bookStore
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 允许异步编辑远程数据 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.define('Book', {
+		extend: 'Ext.data.Model',
+		fields: [
+			{name: 'id' , type: 'int'},
+			{name: 'name', type: 'string'},
+			{name: 'author', type: 'string'},
+			{name: 'price', type: 'float'},
+		]
+	});
+	// 创建一个Ext.data.Store对象
+	var bookStore = Ext.create('Ext.data.Store', 
+	{
+		// 指定使用Book Model管理记录
+		model: 'Book',
+		// 使用proxy指定加载远程数据
+		proxy: 
+		{
+			type: 'ajax',
+			url: 'getAllBooks',// 向该URL发送Ajax请求
+			reader: { // 使用Ext.data.reader.Json读取服务器数据
+				type: 'json',
+				root: 'data' // 直接读取服务器响应的data数据
+			},
+		},
+		autoLoad:true// 自动加载服务器数据
+	});
+	var editWin;
+	// 定义单击“编辑”按钮的事件处理函数
+	var editFn = function(grid, rowIndex, colIndex)
+	{
+		var rec = grid.getStore().getAt(rowIndex);
+		if(editWin)
+		{
+			editWin.setTitle('编辑《' + rec.get('name') + '》');
+			var formFields = editWin.items.get(0).items;
+			formFields.get(0).setValue(rec.get('id'));
+			formFields.get(1).setValue(rec.get('name'));
+			formFields.get(2).setValue(rec.get('author'));
+			formFields.get(3).setValue(rec.get('price'));
+		}
+		else
+		{
+			editWin = Ext.create("Ext.window.Window",
+			{
+				title : '编辑《' + rec.get('name') + '》',
+				items: [
+					{
+						url: 'updateBook',
+						xtype: 'form',
+						width: '100%',
+						bodyPadding: 10,
+						items: [
+							{
+								xtype: 'textfield',
+								name: 'id',
+								readOnly: true,
+								value: rec.get('id'), // 指定该表单控件的值
+								fieldLabel: 'ID', // 指定该表单控件的标签
+							}, 
+							{
+								xtype: 'textfield',
+								name: 'name',
+								value: rec.get('name'), // 指定该表单控件的值
+								fieldLabel: '书名', // 指定该表单控件的标签
+							},
+							{
+								xtype: 'textfield',
+								name: 'author',
+								value: rec.get('author'), // 指定该表单控件的值
+								fieldLabel: '作者', // 指定该表单控件的标签
+							},
+							{
+								xtype: 'textfield',
+								name: 'price',
+								value: rec.get('price'), // 指定该表单控件的值
+								fieldLabel: '价格', // 指定该表单控件的标签
+							}
+						]
+					}
+				],
+				listeners: {
+					beforedestroy : function(cmp)
+					{
+						this.hide();
+						return false;
+					}
+				},
+				bbar: [
+					{xtype: 'tbfill' ,},
+					{text:'确定' , handler: function()
+						{
+							// 获取表单，实际返回的是Ext.form.Basic对象
+							var form = editWin.items.get(0).getForm();
+							// 如果表单输入校验通过
+							if (form.isValid()) 
+							{
+								// 以Ajax方式提交表单
+								form.submit(
+								{
+									// 修改成功的回调函数
+									success: function(form, action) 
+									{
+										bookStore.reload();
+										editWin.hide();
+										alert(action.result.tip);
+									}
+								});
+							}
+						}
+					}, 
+					{text:'取消' , handler:function()
+					{
+						editWin.hide();
+					}},
+					{xtype: 'tbfill' ,}
+				]
+			});
+		}
+		editWin.setVisible(true);
+	};
+	// 定义单击“删除”按钮的事件处理函数
+	var deleteFn = function(grid, rowIndex, colIndex) 
+	{
+		if(confirm("确认删除" , "您是否真想删除该记录"))
+		{
+			var rec = grid.getStore().getAt(rowIndex);
+			Ext.Ajax.request({
+				url: 'deleteBook', // 向此处发送Ajax请求
+				method: 'POST',
+				params: { // 指定请求参数
+					id: rec.get('id')
+				}, // 指定服务器响应完成的回调函数
+				success: function(response){
+					bookStore.reload();
+					alert(Ext.JSON.decode(response.responseText).tip);
+				}
+			});
+		}
+	};
+	var grid = Ext.create('Ext.grid.Panel', {
+		title: '查看服务器端图书',
+		width: 550, // 指定表单宽度
+		renderTo: Ext.getBody(),
+		// 定义该表格包含的所有数据列
+		columns: [
+			{ text: '图书ID', dataIndex: 'id' , flex: 1 }, // 第1个数据列
+			 // 第2个数据列
+			{ text: '书名', dataIndex: 'name' , flex: 1,
+				editor: {xtype: 'textfield', allowPattern: false}},
+			 // 第3个数据列
+			{ text: '作者', dataIndex: 'author', flex: 1,
+				editor: {xtype: 'textfield', allowPattern: false}},
+			// 第4个数据列
+			{ text: '价格', dataIndex: 'price' , flex: 1,
+				editor: {xtype: 'numberfield', allowPattern: false}},
+			{
+				text: '操作',
+				xtype:'actioncolumn',
+				width: 50,
+				items: [
+					{
+						icon: 'edit.gif', // 指定图标
+						tooltip: '编辑',
+						handler: editFn // 指定单击“编辑”按钮的事件处理函数
+					},
+					{
+						icon: 'delete.gif', // 指定图标
+						tooltip: '删除',
+						handler: deleteFn // 指定单击“删除”按钮的事件处理函数
+					}
+				]
+			}
+		],
+		store: bookStore
+	});
+});
+</script>
+</body>
+</html>

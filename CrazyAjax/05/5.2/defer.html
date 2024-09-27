@@ -1,0 +1,15 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	var fn = function(msg)
+	{
+		alert("此用户的名字是：" + this.name
+			+ "," + msg);
+	}
+	var user = {
+		name : "孙悟空"
+	}
+	// 执行延迟3秒之后执行fn函数
+	Ext.defer(fn , 3000 ,user , ["欢迎您"]);
+</script>

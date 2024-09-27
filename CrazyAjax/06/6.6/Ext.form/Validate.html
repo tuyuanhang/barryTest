@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 简单的输入校验 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建表单容器
+	Ext.create('Ext.form.Panel', {
+		title: '简单的输入校验',
+		bodyPadding: 5,
+		width: 350, // 指定表单宽度
+		// 当提交表单时自动提交Ajax请求。
+		url: 'loginPro',
+		// 默认使用anchor布局方式
+		layout: 'anchor',
+		// 设置表单控件默认占满整个容器
+		defaults: {
+			anchor: '100%'
+		},
+		// 设置表单组件的默认类型
+		defaultType: 'textfield',
+		// 为所有表单控件设置默认属性
+		fieldDefaults: {
+			labelAlign: 'left',
+			labelWidth: 100
+		},
+		items: [
+			{
+				fieldLabel: '用户名', // 表单控件的Label
+				name: 'name', // 表单控件的名称
+				allowBlank: false, // 输入校验：不允许为空
+				minLength: 4, // 字符串最小长度
+				maxLength: 8 // 字符串最大长度
+			},
+			{
+				fieldLabel: '密码', // 表单控件的Label
+				name: 'passwd', // 表单控件的名称
+				allowBlank: false, // 输入校验：不允许为空
+				minLength: 4, // 字符串最小长度
+				maxLength: 6 // 字符串最大长度
+			},
+			{
+				fieldLabel: '电话号码', // 表单控件的Label
+				name: 'phone', // 表单控件的名称
+				allowBlank: false, // 输入校验：不允许为空
+				regex: /^020\-\d{8}$/, // 正则表达式校验
+				// 指定校验失败的提示信息
+				regexText: '您输入的电话号码必须满足020-xxxxxxxx格式！'
+			}
+		],
+		// 为表单设置按钮
+		buttons: [
+			{
+				// 重设按钮
+				text: '重设',
+				// 单击该按钮时重设表单
+				handler: function() 
+				{
+					this.up('form').getForm().reset();
+				}
+			},
+			{
+				// 提交按钮
+				text: '提交',
+				disabled: true, // 设置该按钮默认不可用
+				formBind: true, // 只有当整个表单输入校验通过时，该按钮才可用
+			}
+		],
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

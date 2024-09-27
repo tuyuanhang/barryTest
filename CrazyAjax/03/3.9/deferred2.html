@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Deferred对象 </title>
+</head>
+<body>
+<script type="text/javascript" src="../jquery-1.8.0.js">
+</script>
+<script type="text/javascript">
+	// 已有的对象
+	var obj = 
+	{
+		hello: function( name ) 
+		{
+			document.write(name + "，您好！<br/>");
+		}
+	};
+	// 创建一个Deferred对象
+	var defer = $.Deferred();
+	// 为obj对象增加Deferred接口
+	defer.promise(obj);         //①
+	// 将obj当成Promise对象使用
+	obj.done(function(name) 
+	{
+		obj.hello(name);
+	}).done(function(name)
+	{
+		document.write("执行完成了：" + name + "<br/>");
+	});
+	// 将Deferred对象的状态设为resolved，
+	// 这将激发obj对象上通过done()方法添加的回调函数
+	defer.resolve("孙悟空");    //②
+</script>
+</body>
+</html>

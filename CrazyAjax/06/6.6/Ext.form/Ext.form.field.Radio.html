@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.field.Radio </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	var chooseHander = function(item , e)
+	{
+		// 根据被单击菜单项，将对应的单选框设为勾选状态
+		Ext.getCmp(item.value + 'Radio').setValue(true);
+	}
+	Ext.create('Ext.form.Panel', {
+		title : '使用Ext.form.field.Radio',
+		width : 300,
+		bodyPadding: 10,
+		renderTo : Ext.getBody(),
+		items: [
+		{
+			// 定一个容器，用于盛装多个单选框
+			xtype : 'fieldcontainer',
+			fieldLabel : '选择颜色',
+			defaultType : 'radiofield', // 设置组件的默认类型是单选框
+			defaults: {flex: 1},
+			layout: 'hbox',
+			items: [
+				{
+					boxLabel : '红色', // 设置单选框的标签
+					name : 'color',
+					inputValue: 'red', /// 设置单选框代表的参数值
+					id : 'redRadio' // 设置单选框的ID
+				},
+				{
+					boxLabel : '绿色', // 设置单选框的标签
+					name : 'color',
+					inputValue : 'green', // 设置单选框代表的参数值
+					id : 'greenRadio' // 设置单选框的ID
+				},
+				{
+					boxLabel : '蓝色', // 设置单选框的标签
+					name : 'color',
+					inputValue : 'blue', // 设置单选框代表的参数值
+					id : 'blueRadio' // 设置单选框的ID
+				}
+			]
+		}],
+		// 定义工具条
+		bbar: [
+		{
+			text: '设置颜色',
+			menu: {
+				// 为该工具按钮定义3个菜单项。
+				// 所有菜单项使用同一个事件处理函数
+				items: [
+				{
+					text: '红色',
+					value: 'red',
+					handler: chooseHander
+				},
+				{
+					text: '绿色',
+					value: 'green',
+					handler: chooseHander
+				},
+				{
+					text: '蓝色',
+					value: 'blue',
+					handler: chooseHander
+				}]
+			}
+		}]
+	});
+});
+</script>
+</body>
+</html>

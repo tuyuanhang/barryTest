@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Ext JS入门 </title>
+	<!-- 导入必需的Ext JS必须的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+// 指定当Ext JS和HTML页面加载完成后执行该函数
+Ext.onReady(function(){
+	// 创建一个按钮
+	var bn = Ext.create('Ext.Button', 
+	{
+		text: "单击我",// 按钮的文本
+		scale: "large",
+		icon: "home.gif",
+		renderTo: Ext.getBody(),//指定将该按钮放入body元素内
+		handler:function()// 为该按钮绑定事件处理函数
+		{
+			// 获取ID为target的元素，并控制它
+			Ext.fly("target")   // ①
+				.setHeight(80)
+				.setWidth(80)
+				.center()// 居中
+				.highlight()// 高亮
+				.setStyle("background-color" , "#f0f")
+				.setStyle("border" , "2px solid black");
+		}
+	});
+});
+</script>
+<div id="target"></div>
+</body>
+</html>

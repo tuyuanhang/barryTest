@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 表格布局 </title>
+	<style type="text/css">
+		.fkjava{
+			font-size: 14pt;
+			border: 3px dotted red;
+		}
+	</style>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	Ext.create('Ext.panel.Panel', 
+	{
+		title: '表格布局',
+		width: 400,
+		height: 120,
+		layout: {
+			type: 'table', // 指定使用表格布局
+			columns: 3 // 指定该表格包含3列
+		},
+		// 对所有子组件都起作用的设置
+		defaults: {
+			bodyPadding: 10
+		},
+		items: [
+			{
+				title: '标题',
+				html: '跨两行的组件',
+				rowspan: 2
+			},
+			{
+				html: '跨两列的组件',
+				colspan: 2,
+				width: 300
+			},
+			{
+				html: '为单元格指定ID',
+				cellId: 'cellC'
+			},
+			{
+				html: '为单元格指定CSS样式',
+				cellCls: 'fkjava'
+			}
+		],
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.action.Load提交表单 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	var itemHandler = function(item, e)
+	{
+		Ext.getCmp('bookForm').load(
+		{
+			params: {
+				bookId: item.value
+			},
+			// 提交失败
+			failure: function(form, action)
+			{
+				Ext.Msg.alert('加载失败', action.result 
+					? action.result.msg : "服务器响应出现错误！");
+			}
+		});
+	}
+	// 创建表单容器
+	Ext.create('Ext.form.Panel', {
+		id:'bookForm',
+		title: '使用Ext.form.action.Load提交表单',
+		bodyPadding: 5,
+		width: 350, // 指定表单宽度
+		// 当提交表单时自动提交Ajax请求。
+		url: 'getBook',
+		method: 'POST', // 指定以POST方式提交请求
+		// 默认使用anchor布局方式
+		layout: 'anchor',
+		// 设置表单控件默认占满整个容器
+		defaults: {
+			anchor: '100%'
+		},
+		// 设置表单组件的默认类型
+		defaultType: 'textfield',
+		// 为所有表单控件设置默认属性
+		fieldDefaults: {
+			labelAlign: 'left',
+			labelWidth: 100
+		},
+		items: [
+			{
+				fieldLabel: '图书名', // 表单控件的Label
+				name: 'name', // 表单控件的名称
+				readOnly: true, // 设为只读
+			},
+			{
+				fieldLabel: '作者', // 表单控件的Label
+				name: 'author', // 表单控件的名称
+				readOnly: true, // 设为只读
+			},
+			{
+				fieldLabel: '价格', // 表单控件的Label
+				name: 'price', // 表单控件的名称
+				readOnly: true, // 设为只读
+			}
+		],
+		bbar: [
+			{xtype: 'tbfill'},
+			{
+				text: "选择图书",
+				xtype: 'splitbutton',
+				width: 100,
+				menu: [ // 设置菜单
+					{text:'图书1' , value:1 , handler: itemHandler},
+					{text:'图书2' , value:2 , handler: itemHandler},
+					{text:'图书3' , value:3 , handler: itemHandler},
+					{text:'图书4' , value:4 , handler: itemHandler}
+				]
+			}
+		],
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

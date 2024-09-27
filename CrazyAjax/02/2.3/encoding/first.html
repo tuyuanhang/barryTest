@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 发送请求的编码问题 </title>
+</head>
+<body>
+<input id="test" name="test" type="text" size="70" />
+<br />
+<input type="button" value="GET发送"
+	onclick='getSend(document.getElementById("test").value)' />
+<input type="button" value="POST发送"
+	onclick='postSend(document.getElementById("test").value)' />
+<script type="text/javascript">
+// 保存XMLHttpRequest对象的变量
+var xmlrequest;
+function createXMLHttpRequest()
+{
+	if(window.XMLHttpRequest)
+	{
+		// DOM 2 浏览器
+		xmlrequest = new XMLHttpRequest();
+	}
+	// IE浏览器
+	else if (window.ActiveXObject)
+	{
+		try
+		{
+			xmlrequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				xmlrequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{}
+		}
+	}
+}
+// 发送POST请求
+function postSend(value)
+{
+	// 初始化XMLHttpRequest对象
+	createXMLHttpRequest();
+	// 服务器的请求URL
+	var uri = "show.jsp";
+	// 使用POST方式打开与服务器的连接
+	xmlrequest.open("POST", uri, true); 
+	xmlrequest.setRequestHeader("Content-Type"
+		, "application/x-www-form-urlencoded");
+	// 发送请求
+	xmlrequest.send("value="+value);
+}
+// 发送GET请求
+function getSend(value)
+{
+	// 创建XMLHttpRequest对象
+	createXMLHttpRequest(); 
+	// 设置请求的服务器程序URL
+	var uri = "show.jsp?value="+value;
+	// 使用GET方式打开连接
+	xmlrequest.open("GET", uri, true); 
+	// 发送请求
+	xmlrequest.send(null);
+}
+</script>
+</body>
+</html>

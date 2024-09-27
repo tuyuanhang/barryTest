@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 自适应布局 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	Ext.create('Ext.panel.Panel', {
+		title: '采用Fit布局的外层Panel',
+		width: 300,
+		height: 150,
+		layout:'fit',// 设置自适应布局
+		// 内部只包含唯一组件，
+		// 该组件大小将会与父容器完全相同
+		items: 
+		{
+			title: '内部Panel Panel',
+			html: '内部Panel的内容',
+			bodyPadding: 10
+		},
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

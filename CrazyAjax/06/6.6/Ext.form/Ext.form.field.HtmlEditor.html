@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.field.TextArea </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 初始化QuickTip提示
+	Ext.tip.QuickTipManager.init();
+	new Ext.form.Panel({
+		title: '使用Ext.form.field.TextArea',
+		width: 600, // 设置该Panel的宽度。
+		height: 250, // 设置该Panel的高度。
+		bodyPadding: 5,
+		renderTo: Ext.getBody(),
+		frame: true,
+		items: {
+			xtype: 'htmleditor',
+			anchor: '100%',
+			name: 'content',
+			enableAlignments:true, // 显示对齐工具按钮。
+			enableColors:true, // 显示颜色工具按钮。
+			enableFont:true, // 显示字体工具按钮。
+			enableFontSize:true, // 显示字体大小工具按钮。
+			enableFormat:true, // 显示格式工具按钮。
+			enableLinks:true, // 显示超级链接工具按钮。
+			enableLists:true // 显示列表项工具按钮。
+		}
+	});
+});
+</script>
+</body>
+</html>

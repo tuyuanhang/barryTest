@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用容器 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	// 创建容器对象
+	var con = Ext.create('Ext.container.Container',
+	{
+		// 指定布局方式
+		layout: {
+			type: 'vbox',       //①
+			align: 'center'
+		},
+		width: 300,// 指定宽度
+		height: 160, // 指定高度
+		renderTo: Ext.getBody(), // 指定将该容器追加到<body.../>元素中
+		style: {
+			border: '1px solid black',
+			backgroundColor:'#afa'
+		},
+		// 指定对该容器中所有添加项进行的默认设置
+		defaults: {
+			labelWidth: 120,
+			flex: 1
+		},
+		// 指定该容器包含的组件
+		items: [
+			// 第2个组件，xtype是datefield，表明是一个日期选择器
+			{
+				xtype: 'datefield',
+				name: 'startDate',
+				fieldLabel: '开始日期'
+			},
+			// 第2个组件，xtype是datefield，表明是一个日期选择器
+			{
+				xtype: 'datefield',
+				name: 'endDate',
+				fieldLabel: '结束日期'
+			},
+			// 第3个组件，xtype是button，表明是一个按钮
+			{
+				xtype: 'button',
+				text: '确定',
+				width: 100,
+				height: 20,
+				padding: '0px',
+				margin: '10px',
+				flex: 0 // 控制该组件缩放时所占的比例
+			}
+		]
+	});
+});
+</script>
+</body>
+</html>

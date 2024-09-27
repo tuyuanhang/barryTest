@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> util.js测试 </title>
+</head>
+<body>
+<ol id="test"></ol>
+<input type="button" value="添加选项" onclick="add();"/>
+<input type="button" value="删除选项" onclick="del();"/>
+<script src="../util.js" type="text/javascript"></script>
+<script type="text/javascript">
+var strArr = ['请选择一本图书','疯狂Java讲义',
+	'疯狂Ajax讲义','疯狂XML讲义'];
+function add()
+{
+	// 以字符串数组来为列表框添加列表项
+	dwr.util.addOptions("test" , strArr);
+}
+function del()
+{
+	// 删除下拉列表中的全部列表项
+	dwr.util.removeAllOptions("test");
+}
+</script>
+</body>
+</html>

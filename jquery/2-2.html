@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Javascript检测页面元素</title>
+	<style type="text/css">
+		body{font-size:12px; text-align:center}
+	</style>
+	<!--<script type="text/javascript">
+		window.onload=function() {
+			if(document.getElementById("divT")) {
+				var oDiv = document.getElementById("divT");
+				oDiv.innerHTML="这是一个检测页面";
+			}
+		}
+	</script>-->
+	<script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#divT").html("test");
+		});
+	</script>
+</head>
+<body>
+	<div id="divT"></div>
+</body>
+</html>

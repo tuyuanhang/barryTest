@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 分页 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建一个Ext.data.Store对象
+	var bookStore = Ext.create('Ext.data.Store', 
+	{
+		// 指定读取数据的name、id字段
+		fields: ['name' , 'id'],
+		pageSize: 2, // 设置每页显示2条记录
+		proxy: 
+		{
+			type: 'ajax',
+			url: 'getBooksByPage',// 向该URL发送Ajax请求
+			reader: { // 使用Ext.data.reader.Json读取服务器数据
+				type: 'json',
+				totalProperty: 'total',
+				root: 'data' // 直接读取服务器响应的data数据
+			},
+		},
+		autoLoad: true
+	});
+	Ext.create('Ext.form.Panel', {
+		title: '选择图书',
+		bodyPadding: 5,
+		width: 380, // 指定表单宽度
+		height: 120, // 指定表单宽度
+		// 默认使用anchor布局方式
+		layout: 'anchor',
+		renderTo: Ext.getBody(),
+		// 设置表单控件默认占满整个容器
+		defaults: {
+			anchor: '100%'
+		},
+		items:[
+			{
+				id: 'books_combo',
+				xtype: 'combobox',
+				fieldLabel: '选择图书',
+				autoSelect: true,
+				width: 300,
+				store: bookStore, // 使用books数据提供下拉列表项的数据
+				displayField: 'name', // 列表项的显示文本使用name字段的值。
+				valueField: 'id', // 列表项的值使用id字段的值。
+				queryMode: 'local', // 指定使用Store中已有数据
+			}
+		],
+		// 定义一个分页工具条
+		bbar: {
+			id: "pagebar",
+			xtype:'pagingtoolbar',
+			region:'south',
+			store: bookStore, // 指定对bookStore控制分页
+			displayInfo: true,  
+			emptyMsg: "没有记录",
+			listeners:{
+				change: function(paging, pageData)
+				{
+					// 当分页完成时，重设books_combo组件
+					Ext.getCmp('books_combo').reset();
+				}
+			}
+		}
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 使用jQuery()函数 </title>
+	<style type="text/css">
+		.test{
+			font-size:20pt;
+		}
+	</style>
+</head>
+<body>
+<ul>
+	<li id="java">疯狂Java讲义</li>
+	<li id="javaee" class="test">轻量级Java EE企业应用实战</li>
+	<li id="ajax">疯狂Ajax讲义</li>
+	<li id="xml">疯狂XML讲义</li>
+	<li id="ejb">经典Java EE企业应用实战</li>
+	<li><span id="android">疯狂Android讲义</span></li>
+</ul>
+<script type="text/javascript" src="../jquery-1.8.0.js">
+</script>
+<script type="text/javascript">
+// 获取id为java的元素
+$("#java").append("<b> 是id为java的元素</b>");
+// 获取所有包含id属性的<li.../>元素，为它们增加背景色
+$("li[id]").css("background-color" , "#bbbbff");
+// 获取class属性为test的元素，并为它们增加边框
+$(".test").css("border" , "3px dotted black");
+// 同时获取id为xml、android的元素
+$("#xml,#android").append("<b>是id为xml、android其中之一的元素</b>");
+// 获取ul之内，id为ajax的元素
+$("ul #android").append("<br /><b>位于ul之内、id为android的子元素</b>");
+// 获取ul之内，id为ajx的直接子元素
+$("ul>#ajax").append("<b>ul之内、id为ajax的子元素</b>")
+	.css("border" , "2px solid black");
+// 获取id为ajax之后的所有li元素
+$("#ajax~li").css("background-color" , "#ff5555");
+</script>
+</body>
+</html>

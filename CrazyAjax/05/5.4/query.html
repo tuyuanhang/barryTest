@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Ext.query()方法 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		// 获取页面上所有的div元素，返回是一个数组
+//		var divs = Ext.query("div");
+		// Ext.query是Ext.dom.Query.select的别名
+		var divs = Ext.dom.Query.select("div");
+		// 遍历div元素的数组
+		Ext.each(divs , function(div , index , myself)
+		{
+			// 依次修改每个div元素的内容
+			div.innerHTML = "第" + index + "个元素";
+			// 依次修改每个div元素的CSS样式
+			div.style.border = "2px solid black";
+			div.style.width = "240px";
+			div.style.height = "65px";
+			div.style.backgroundColor = "rgb(" + (index * 80)
+				+ ",255," + (index * 80) + ")";
+		});
+ 	});
+</script>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

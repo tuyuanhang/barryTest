@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+		<title>Jquery test</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script language="javascript" type="text/javascript"
+			src="/sources/Jscripts/jquery-1.8.3.js">
+		</script>
+	</head>
+	<body>
+		<form action="">
+			<p>选择爱好：</p>
+			<p>
+				<label>
+					<input type="checkbox" name="" id="" /> 打篮球
+				</label>
+			</p>
+			<p>
+				<label>
+					<input type="checkbox" name="" id="" /> 踢足球
+				</label>
+			</p>
+			<p>
+				<label>
+					<input type="checkbox" name="" id="" /> 去游泳
+				</label>
+			</p>
+			<p>
+				<label>
+					<input type="checkbox" name="" id="" /> 其他
+				</label>
+			</p>
+			<p>
+				<button id='all'>全选</button>
+			    <button id='notall'>全不选</button>
+				<button id='unall'>反选</button>
+			</p>
+			<div class="div1">
+				<div class="div2">test</div>
+			</div>
+		</form>
+		<script type="text/javascript">
+			$('#all').click(function(){
+				$(':checkbox').attr({'checked':true});
+			});
+			$('#noall').click(function(){
+				$(':checkbox').attr({'checked':false});
+			});
+		</script>
+	</body>
+</html>

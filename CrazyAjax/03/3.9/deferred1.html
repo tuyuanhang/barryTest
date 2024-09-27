@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Deferred对象 </title>
+</head>
+<body>
+<script type="text/javascript" src="../jquery-1.8.0.js">
+</script>
+<script type="text/javascript">
+	var calPrime = function(start , end)
+	{
+		// 定义一个Deferred对象
+		var dfd = $.Deferred();      //①
+		try
+		{
+			var result = "";
+			search:
+			for (var n = start ; n <= end ; n++)
+			{
+				for (var i = 2; i <= Math.sqrt(n); i ++)
+				{
+					// 如果除以n的余数为0，开始判断下一个数字。
+					if (n % i == 0)
+					{
+						continue search;
+					}
+				}
+				// 搜集找到的质数
+				result += (n + ",");
+			}
+			// 当整个“耗时任务”执行完成时，将Deferred对象的状态改为resolved
+			dfd.resolve(result);      //②
+		}
+		catch (e)
+		{
+			// 如果程序出现异常，将Deferred对象的状态改为rejected
+			dfd.reject("任务失败");   //③
+		}
+		return dfd.promise();
+	}
+	// 调用calPrime()耗时函数
+	calPrime(1, 1000000)
+		// 通过done()方法添加回调函数
+		.done(function(result)
+		{
+			$("body").append(result);
+		})
+		// 通过fail()方法添加回调函数
+		.fail(function(result)
+		{
+			$("body").append("计算出错了！");
+		});
+</script>
+</body>
+</html>

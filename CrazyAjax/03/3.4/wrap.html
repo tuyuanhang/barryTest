@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 包裹HTML节点 </title>
+</head>
+<body>
+<span id="test1">id为test1的元素</span><br />
+<span id="test2">id为test2的元素</span>
+<script type="text/javascript" src="../jquery-1.8.0.js">
+</script>
+<script type="text/javascript">
+// 将每个span元素之外再包裹一个带点线边框的div元素
+$("span").wrap("<div style='border:1px dotted black'></div>");
+// 将每个span元素内部成分再包裹一个灰色背景的span元素
+$("span").wrapInner("<span style='background-color:#ddd'></span>");
+</script>
+</body>
+</html>

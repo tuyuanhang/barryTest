@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 访问Servlet API </title>
+</head>
+<body>
+<script type='text/javascript' src='./leedwr/engine.js'></script>
+<script type='text/javascript' src='./leedwr/util.js'></script>
+<script type='text/javascript' src='./leedwr/interface/read.js'></script>
+<script type='text/javascript' >
+function cb(data)
+{
+	$("test").innerHTML = data;
+}
+</script>
+<h3>读取其他URL的数据</h3>
+请输入您的名字<input id="name" name="name" type="text"/><br />
+<input type="button" value="发送请求"
+	onclick="read.read(dwr.util.getValue('name') , cb);"/>
+<hr />
+<div id="test"></div>
+</body>
+</html>

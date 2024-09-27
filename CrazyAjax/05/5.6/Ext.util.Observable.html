@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 使用Observable实现自定义事件 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+var user = null;
+Ext.onReady(function()
+{
+	// 自定义CrazyitUser类
+	Ext.define('Crazyit.User', 
+	{
+		extend: 'Ext.util.Observable',
+		constructor: function(config)
+		{
+			this.name = config.name;
+			// 增加两个自定义事件
+			this.addEvents({
+				"fired" : true,
+				"quit" : true
+			});
+			// 添加监听器
+			this.listeners = config.listeners;
+			// 回调父类的方法
+			this.callParent(arguments)
+		}
+	});
+	user = new Crazyit.User({
+		name: "孙悟空",
+		listeners: {
+			fired : function(evt)
+			{
+				alert(this.name + "的fired事件被触发");
+			}
+		}
+	});
+	// 为quit事件绑定事件监听器
+	user.on("quit" , function(evt)
+	{
+		alert(this.name + "的quit事件被触发");
+	});
+});
+</script>
+<button onclick="user.fireEvent('quit');">触发quit事件</button>
+<button onclick="user.fireEvent('fired');">触发fired事件</button>
+</body>
+</html>

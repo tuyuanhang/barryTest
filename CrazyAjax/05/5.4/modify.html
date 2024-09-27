@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 添加元素内容 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		// 删除ID为removed的元素
+		Ext.fly("removed").remove();
+		// 在ID为a的元素的前部添加内容
+		Ext.fly("a").insertFirst(
+			{
+				tag: "div",
+				html: "添加的内容!",
+				style: "background-color:#faa;"
+			});
+		// 将ID为b的元素追加到ID为a的元素中
+		Ext.fly("a").appendChild("b");
+
+	});
+</script>
+<div id="removed">将要被删除的元素</div>
+<div id="a" style="border:1px solid black;height:80px">fkjava</div>
+<div id="b" style="background:#faa;">最后添加的内容</div>
+</body>
+</html>

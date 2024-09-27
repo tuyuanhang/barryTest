@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.CheckboxGroup </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.create('Ext.form.Panel', 
+	{
+		title: '复选框组',
+		width: 300,
+		height: 125,
+		bodyPadding: 10,
+		renderTo: Ext.getBody(),
+		items:[
+			{
+				xtype: 'checkboxgroup',
+				fieldLabel: '两列复选框组',
+				// 指定平均分布成2列
+				columns: 2,
+				vertical: true,
+				// 该容器内包含的多个复选框
+				items: [
+					{ boxLabel: '项目 1', name: 'rb', inputValue: '1' },
+					{ boxLabel: '项目 2', name: 'rb', inputValue: '2'
+						, checked: true },
+					{ boxLabel: '项目 3', name: 'rb', inputValue: '3' },
+					{ boxLabel: '项目 4', name: 'rb', inputValue: '4' },
+					{ boxLabel: '项目 5', name: 'rb', inputValue: '5' },
+					{ boxLabel: '项目 6', name: 'rb', inputValue: '6' }
+				]
+			}]
+	});
+});
+</script>
+</body>
+</html>

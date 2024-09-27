@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 使用jQuery()函数 </title>
+</head>
+<body>
+<div id="lee"></div>
+<div id="yeeku"></div>
+<script type="text/javascript" src="../jquery-1.8.0.js">
+</script>
+<script type="text/javascript">
+// 获取所有<div.../>标签对应的DOM对象
+$("div").append("新增的内容");
+// 直接将一个DOM对象包装成jQuery对象
+$(document.getElementById('lee'))
+	.css("background-color" , "#aaffaa")
+	.css("border" , "1px solid black");
+// 使用HTML字符串创建一个DOM对象，并将添加到body元素内
+$("<input type='button' value='单击我'/>")
+	.appendTo(document.body);
+// 使用HTML字符串创建一个DOM对象，并在创建时添加属性
+$("<input/>", 
+	{
+		type:"button" ,
+		value: "有惊喜",
+		click: function(){alert("惊喜时刻！");}
+	})
+	.appendTo(document.body);
+</script>
+</body>
+</html>

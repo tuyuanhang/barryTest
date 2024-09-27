@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 使用Ext.form.field.Date </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.create('Ext.form.Panel', {
+		renderTo: Ext.getBody(),
+		width: 300,
+		bodyPadding: 10,
+		title: '选择有效时间',
+		items: [
+		{
+			xtype: 'datefield', // 指定它是一个日期选择器
+			anchor: '100%',
+			name: 'fromDate',
+			fieldLabel: '开始日期',
+			minValue: '2012/08/01', // 指定最小日期
+			maxValue: new Date(), // 指定最大日期
+			disabledDays:[1,2], // 指定周一、周二不允许选择
+			format: 'm-d-Y', // 指定按此格式解析日期字符串
+			// 如果format指定的格式不能解析，
+			// 将会依次使用altFormats指定的格式进行解析
+			altFormats: 'Y,m,d|Y/m/d', 
+		},
+		{
+			xtype: 'datefield', // 指定它是一个日期选择器
+			anchor: '100%',
+			fieldLabel: '结束日期',
+			name: 'toDate',
+			minvalue: new Date(), // 指定最小日期
+			// 指定每年的9月16日、9月20日不可选择
+			disabledDates: ['09-16' , '09-20'], 
+			format: 'm-d-Y'
+		}]
+	});
+});
+</script>
+</body>
+</html>

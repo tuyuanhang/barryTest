@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> util.js测试 </title>
+</head>
+<body>
+<table width="400" border="1">
+<tr>
+<th>国家</th>
+<th>城市一</th>
+<th>城市二</th>
+<th>城市三</th>
+</tr>
+<tbody id="test"></tbody>
+</table>
+<input type="button" value="添加行" onclick="add();" />
+<input type="button" value="删除行" onclick="del();" />
+<script src="../util.js" type="text/javascript"></script>
+<script type="text/javascript">
+// 定义一个二维数组，用于在表格中输出
+var rowArr = [['中国城市：','广州','上海','北京'],
+	['美国城市：','加州','华盛顿','纽约'],
+	['英国城市：','利物浦','伦敦','伯明翰']];
+var cellfuncs = [
+// 表格函数，每个函数对应表格的一列。
+// 系列函数的data都是rowArr数组的元素——每个数组元素都是一维数组
+function(data){ 
+	return data[0];
+},
+function(data){
+	return data[1];
+},
+function(data){
+	return data[2];
+},
+function(data){
+	return data[3];
+}];
+// 添加表格行
+function add()
+{
+	dwr.util.addRows("test" , rowArr , cellfuncs);
+}
+function del()
+{
+	dwr.util.removeAllRows("test");
+}
+</script>
+</body>
+</html>

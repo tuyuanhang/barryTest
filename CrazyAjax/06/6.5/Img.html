@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 图片 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="a.css" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建Ext.Img对象
+	var img = Ext.create('Ext.Img', {
+		// 指定src属性
+		src: 'java.png',
+		autoEl: 'div', // 使用<div.../>元素包裹该图片
+		renderTo: Ext.getBody(),
+	});
+	// 创建按钮
+	Ext.create('Ext.button.Button' , 
+	{
+		text:'改变图片',
+		renderTo: Ext.getBody(),
+		// 单击该按钮时激发该事件处理函数
+		handler: function(e)
+		{
+			img.setSrc('http://www.crazyit.org/logo.jpg');
+		}
+	});
+});
+</script>
+</body>
+</html>

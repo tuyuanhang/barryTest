@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> scope与options </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	// 定义user对象
+	var user = {
+		name: "孙悟空"
+	};
+	var handler = function(evt)
+	{
+		alert("name变量的值为：" + this.name);
+	}
+	Ext.get("a").on("click" , handler);
+	Ext.get("b").on("click" , handler , user);
+	Ext.get("c").on("click" , handler , user , {delay:2000});
+});
+</script>
+<button id="a">普通事件</button>
+<button id="b">以user为scope</button>
+<button id="c">以user为scope并指定延迟</button>
+</body>
+</html>

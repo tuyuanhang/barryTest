@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Ext.util.ClickRepeater </title>
+	<style type="text/css">
+		.pressed {
+			color : red;
+			font-weight:bold;
+		}
+	</style>
+</head>
+<body>
+<button id="bn">单击我</td>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+varc1 = new Ext.util.ClickRepeater("bn",
+{
+	delay:1000,// 指定开始重复触发click事件之前的延迟时间。
+	interval:4000,// 指定重复触发click事件之间的时间间隔
+	stopDefault:true, // 停止该元素上单击事件的默认行为
+	handler:function()
+	{
+		alert("单机我按钮被单击了");
+	},
+	pressedCls:"pressed"
+ });
+</script>
+</body>
+</html>

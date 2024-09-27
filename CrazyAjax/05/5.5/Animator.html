@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 多关键帧动画 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		Ext.create('Ext.fx.Animator', {
+			// 对a对象创建动画
+			target: "a",
+			// 动画持续时间
+			duration: 10000,
+			// 定义多个关键帧信息
+			keyframes: {
+				0: {
+					opacity: 1,
+					backgroundColor: 'f00',
+					width: 500
+				},
+				20: {
+					x: 30,
+					height: 35,
+					opacity: 0.5
+				},
+				40: {
+					x: 130,
+					width: 300,
+					height: 60,
+					backgroundColor: '00f'
+				},
+				60: {
+					y: 80,
+					height: 40,
+					opacity: 0.3
+				},
+				80: {
+					width: 200,
+					y: 160
+				},
+				100: {
+					opacity: 1,
+					backgroundColor: '0f0'
+				}
+			}
+		});
+	});
+</script>
+<div id="a" style="background-color:#afa">fkjava</div>
+</body>
+</html>

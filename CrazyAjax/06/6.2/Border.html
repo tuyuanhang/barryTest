@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 边框布局 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function()
+{
+	Ext.create('Ext.panel.Panel', {
+		width: '100%',
+		height: 400,
+		title: '边框布局',
+		layout: 'border',// 设置使用border布局
+		items: [
+			{
+				html: '公司logo、Banner区',
+				region: 'north',// 设置该组件放在上方
+				xtype: 'panel', // 设置该组件是Ext.panel.Panel
+				height: 80, // 设置高度
+				margins: '0 5 5 5'
+			},
+			{
+				title: '操作信息区',
+				region: 'south',// 设置该组件放在下方，默认是Ext.panel.Panel
+				height: 80, // 设置高度
+				split: true, //设置可改变大小
+				margins: '0 5 5 5'
+			},
+			{
+				title: '功能导航区',
+				region:'west', // 设置该组件放在左边
+				layout: 'accordion', // 设置使用可折叠布局
+				margins: '5 0 0 5',
+				width: 200, // 设置宽度
+				collapsible: true,// 设置可折叠
+				items: [
+					{title: '模块一' , html: '模块一的功能列表'},
+					{title: '模块二' , html: '模块二的功能列表'}
+				]
+			},
+			{
+				title: '界面主体区',
+				region: 'center',// 中间区域必须指定组件，无需指定宽度、高度
+				margins: '5 5 0 0'
+			}
+		],
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

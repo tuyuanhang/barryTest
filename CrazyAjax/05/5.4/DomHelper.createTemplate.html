@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Ext.DomHelper </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		// 将新创建的对象添加成a元素的最后一个子节点
+		var table = Ext.DomHelper.append("a" ,
+		// 根据如下对象创建HTML元素
+		{
+			tag : "table", // 指定创建表格
+			// 下面两个属性直接附加到表格上
+			style: "border-collapse:collapse",
+			width: "540px"
+		});
+		// 创建一个Ext.Template对象，包含索引占位符
+		var tpl = Ext.DomHelper.createTemplate(
+		{
+			tag: "tr",
+			html: "<td>{0}</td><td>{1}</td><td>{2}</td>"
+		});
+		var bookArr = [
+			["疯狂Java讲义" , "109" , "yeeku"],
+			["疯狂Android讲义" , "89" , "yeeku"],
+			["疯狂Ajax讲义" , "69" , "yeeku"]
+		];
+		// 遍历数组
+		for(var i = 0 ; i < bookArr.length; i++)
+		{
+			// bookArr[i]依然是数组，
+			// 各数组元素依次填充Ext.Template的各个索引占位符
+			tpl.append(table , bookArr[i]);
+		}
+		// 为所有td元素添加border样式
+		Ext.select("td")
+			.setStyle("border" , "1px solid black");
+	});
+</script>
+<div id="a" style="height:90px;border:1px solid black;">fkjava</div>
+</body>
+</html>

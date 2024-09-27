@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 为Ext.panel.Panel添加工具条 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建Ext.panel.Panel对象
+	Ext.create('Ext.panel.Panel',
+	{
+		renderTo: Ext.getBody(),
+		title: '查询图书',
+		height: 120, // 指定高度
+		// 直接通过html指定该Panel显示的内容，不指定items属性
+		html: '疯狂Java体系图书',
+		// 为该Panel设置工具按钮
+		// 无需指定xtype属性，默认就是tool值，即工具按钮。
+		tools:[
+			{
+				type:'save',
+				tooltip: '保存数据',
+				handler: function(event, toolEl, panel)
+				{
+					alert("用户保存数据");
+				}
+			}
+		],
+		tbar: [
+			{ xtype: 'button', text: '顶部按钮1'},
+			{ xtype: 'button', text: '顶部按钮2'}
+		],
+		bbar: [
+			{ xtype: 'button', text: '底部按钮1'},
+			{ xtype: 'button', text: '底部按钮2'}	
+		],
+		lbar: [
+			{ xtype: 'button', text: '左边按钮1'},
+			{ xtype: 'button', text: '左边按钮2'}
+		],
+		rbar: [
+			{ xtype: 'button', text: '右边按钮1'},
+			{ xtype: 'button', text: '右边按钮2'}	
+		]
+	});
+});
+</script>
+</body>
+</html>

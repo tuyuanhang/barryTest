@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 创建Tab面板 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../ext-lang-zh_CN.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 创建Ext.tab.Panel对象
+	var tabPanel = Ext.create('Ext.tab.Panel',
+	{
+		renderTo: Ext.getBody(),
+		height: 200, // 指定高度
+		items:[
+		{
+			title: "默认的Tab页",
+			html: "默认Tab页面的内容。"
+		}],
+		bbar: [
+			// 前后添加填充区域，保证按钮处于中间
+			{ xtype: 'tbfill' },
+			{ 
+				xtype: 'button',
+				text: '添加',
+				// 为"添加"按钮绑定事件处理函数
+				listeners: {
+					click: function()
+					{
+						// 添加Tab页
+						var tab = tabPanel.add({    //①
+							title: "新增的Tab",
+							html: "添加时间：" + 
+								Ext.util.Format.date(new Date() , 'H时i分s秒'),
+							closable:true // 允许关闭
+						});
+						// 将新创建的Tab页设置成激活页
+						tabPanel.setActiveTab(tab);
+					}
+				}
+			},
+			{ 
+				xtype: 'button',
+				// 为"关闭"按钮绑定事件处理函数
+				text: '关闭',
+				listeners: {
+					click: function()
+					{
+						// 删除当前处于激活的Tab页
+						tabPanel.remove(tabPanel.getActiveTab());  //②
+					}
+				}
+			},
+			{ xtype: 'tbfill' }
+		]
+	});
+});
+</script>
+</body>
+</html>

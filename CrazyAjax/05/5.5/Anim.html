@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> 简单动画 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		Ext.create('Ext.fx.Anim', {
+			// 对a对象创建动画
+			target: "a",
+			// 动画持续时间
+			duration: 2000,
+			// 指定动画循环播放
+			alternate:true,
+			// 执行动画播放10次
+			iterations:10,
+			// 指定动画的开始状态
+			from: {
+				width: 160,
+				height: 60
+			},
+			// 指定动画的结束状态
+			to: {
+				width: 300,
+				height: 150,
+				opacity: 0.5
+			}
+		});
+	});
+</script>
+<div id="a" style="background-color:#afa">fkjava</div>
+</body>
+</html>

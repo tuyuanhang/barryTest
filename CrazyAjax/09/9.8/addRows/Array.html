@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> util.js测试 </title>
+</head>
+<body>
+<table width="400" border="1">
+<tr>
+<th>城市</th>
+<th>国家</th>
+<th>洲</th>
+</tr>
+<tbody id="test"></tbody>
+</table>
+<input type="button" value="添加行" onclick="add();" />
+<input type="button" value="删除行" onclick="del();" />
+<script src="../util.js" type="text/javascript"></script>
+<script type="text/javascript">
+// 定义一个字符串数组，每个数组元素对应表格一行
+var rowArr = ['广州','华盛顿','伦敦'];
+// 定义一个函数数组，每个函数对于表格内的一列
+var cellfuncs = [
+function(data){ 
+	return data;
+},
+function(data){
+	if(data == '广州')return '中国';
+	if(data == '华盛顿')return '美国';
+	if(data == '伦敦')return '英国';
+},
+function(data){
+	if(data == '广州')return '亚洲';
+	if(data == '华盛顿')return '欧洲';
+	if(data == '伦敦')return '欧洲';
+}];
+// 为表格增加行
+function add()
+{
+	dwr.util.addRows("test" , rowArr , cellfuncs);
+}
+// 删除表格内的所有行
+function del()
+{
+	dwr.util.removeAllRows("test");
+}
+</script>
+</body>
+</html>

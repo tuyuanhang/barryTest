@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+	<title> Ext.select()方法 </title>
+</head>
+<body>
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.onReady(function()
+	{
+		// 获取页面上所有的div元素，返回Ext.dom.CompositeElementLite对象
+		Ext.select("div")
+			// 设置Ext.dom.CompositeElementLite对象中所有元素宽、高
+			.setWidth(240)
+			.setHeight(65)
+			// 插入内容
+			.insertHtml("beforeEnd" , "<b>div元素</b>")
+			// 设置CSS样式
+			.setStyle("border" , "2px solid black")
+			.setStyle("background-color" , "#afa");
+ 	});
+</script>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

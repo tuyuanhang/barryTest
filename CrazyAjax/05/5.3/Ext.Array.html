@@ -1,0 +1,25 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	var arr = [20 , 10 , 5 , 8 ,20 , 9];
+	// 计算数组元素的和
+	document.writeln("arr数组的元素的和为："
+		+ Ext.Array.sum(arr) + "<br/>");
+	// 计算数组元素的平均数
+	document.writeln("arr数组的元素的平均数为："
+		+ Ext.Array.mean(arr) + "<br/>");
+	// 在数组中插入新数组
+	Ext.Array.insert(arr , 2 , ["java" , "ajax"]);
+	// 计算数组元素的平均数
+	document.writeln("插入数组后的arr数组："
+		+ arr + "<br/>");
+	var arr1 = ["孙悟空" , "猪八戒" , "白骨精"];
+	var arr2 = ["牛魔王" , "孙悟空" , "白骨精", "蜘蛛精"];
+	// 计算两个数组的共有的元素
+	document.writeln("arr1与arr2求交集为："
+		+ Ext.Array.intersect(arr1 , arr2) + "<br/>");
+	// 计算两个数组的并集
+	document.writeln("arr1与arr2求交集为："
+		+ Ext.Array.union(arr1 , arr2) + "<br/>");
+</script>

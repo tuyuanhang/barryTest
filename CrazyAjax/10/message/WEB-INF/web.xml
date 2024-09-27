@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="GBK"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+
+	<!-- 配置Web应用启动时候加载Spring容器 -->
+	<listener> 
+		<listener-class>org.springframework.web.context.ContextLoaderListener
+		</listener-class> 
+	</listener>
+
+	<!-- 配置DWR的核心Servlet -->
+	<servlet>
+		<!-- 指定DWR核心Servlet的名字 -->
+		<servlet-name>dwr-invoker</servlet-name>
+		<!-- 指定DWR核心Servlet的实现类 -->
+		<servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+		<!--  指定DWR核心Servlet处于调试状态 -->
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<!-- 指定核心Servlet的URL映射 -->
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<!-- 指定核心Servlet映射的URL -->
+		<url-pattern>/leedwr/*</url-pattern>
+	</servlet-mapping>
+</web-app>

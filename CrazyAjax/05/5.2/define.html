@@ -1,0 +1,22 @@
+<!-- 导入Ext JS必需的JavaScript库 -->
+<script type="text/javascript" src="../ext-all.js">
+</script>
+<script type="text/javascript">
+	Ext.define("Crazyit.Person" , 
+	// 该对象用于为Crazyit.Person类指定属性
+	{
+		name:"匿名",
+		age:0,
+		walk:function()
+		{
+			alert(this.name + "正在慢慢地走...");
+		}
+	}, function() // 指定类创建成功的回调函数
+	{
+		alert("Crazyit.Person类创建成功！");
+		// 该回调函数中的this代表了Crazyit.Person类本身
+		alert(this.self == Crazyit.Person.Class);
+	});
+	var p = new Crazyit.Person();
+	p.walk();
+</script>
